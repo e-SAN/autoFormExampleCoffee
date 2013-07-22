@@ -2,13 +2,32 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "bootstrap-3": {}
+      "bootstrap-3": {},
+      "autoform": {
+        "git": "https://github.com/aldeed/meteor-autoform.git",
+        "branch": "master"
+      }
     },
     "packages": {
       "bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
         "tag": "v0.2.8",
         "commit": "8026f0beaa0274849adfcf8c53d919216b5e06ba"
+      },
+      "autoform": {
+        "git": "https://github.com/aldeed/meteor-autoform.git",
+        "branch": "master",
+        "commit": "1ffd4d519879db865ab29c4c3a387b792bded817"
+      },
+      "collection2": {
+        "git": "https://github.com/aldeed/meteor-collection2.git",
+        "branch": "master",
+        "commit": "00bf5f2535b059e89ad35b991f94391b46632d79"
+      },
+      "simple-schema": {
+        "git": "https://github.com/aldeed/meteor-simple-schema.git",
+        "branch": "master",
+        "commit": "ce5d3b90c319330e317da851f2c3e31a4a8bb79e"
       }
     }
   }

@@ -16,7 +16,8 @@ Documents = new Meteor.Collection2("documents", {
         longString: {
             type: String,
             optional: true,
-            rows: 5
+            rows: 5,
+            max: 1000
         },
         maxString: {
             type: String,
@@ -232,6 +233,12 @@ if (Meteor.isClient) {
             e.preventDefault();
             Documents.resetValidation();
             Session.set("selectedDoc", null);
+        }
+    });
+    
+    Template.buttons.events({
+        'click button[type=reset]': function(e, t) {
+            Documents.resetValidation();
         }
     });
 
