@@ -1,0 +1,9 @@
+{
+    "packages": {
+        "bootstrap-3": {},
+        "autoform": {
+            "git": "https://github.com/aldeed/meteor-autoform.git",
+            "branch": "master"
+        }
+    }
+}
