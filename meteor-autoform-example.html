@@ -36,7 +36,7 @@
                     </div>
                     <div class="control-group{{#if afFieldIsInvalid 'longString'}} error{{/if}}">
                         {{afFieldLabel 'longString'}}
-                        {{afFieldInput 'longString'}}
+                        {{afFieldInput 'longString' rows="5"}}
                         {{#if afFieldIsInvalid 'longString'}}
                         <span class="help-block">{{afFieldMessage 'longString'}}</span>
                         {{/if}}

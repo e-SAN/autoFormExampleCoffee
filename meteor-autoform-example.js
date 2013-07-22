@@ -16,7 +16,6 @@ Documents = new Meteor.Collection2("documents", {
         longString: {
             type: String,
             optional: true,
-            rows: 5,
             max: 1000
         },
         maxString: {
