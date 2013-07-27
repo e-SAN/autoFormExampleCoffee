@@ -17,17 +17,17 @@
       "autoform": {
         "git": "https://github.com/aldeed/meteor-autoform.git",
         "branch": "master",
-        "commit": "1ffd4d519879db865ab29c4c3a387b792bded817"
+        "commit": "3fa6471fabfd8fdcf37d576919e6323b3fa8bba1"
       },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
         "branch": "master",
-        "commit": "00bf5f2535b059e89ad35b991f94391b46632d79"
+        "commit": "039e363caebd973e591ba9b44031518fb9ac039a"
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
         "branch": "master",
-        "commit": "ce5d3b90c319330e317da851f2c3e31a4a8bb79e"
+        "commit": "24126eaff16c35076f73641b16e7a209328bce42"
       }
     }
   }

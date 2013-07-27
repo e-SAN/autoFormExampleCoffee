@@ -59,7 +59,7 @@ Documents = new Meteor.Collection2("documents", {
         },
         firstOptionRequiredSelect: {
             type: Number,
-            valueIsAllowed: function (val) {
+            valueIsAllowed: function(val) {
                 return (val === 1 || val === 2 || val === 3);
             }
         },
@@ -135,6 +135,11 @@ Documents = new Meteor.Collection2("documents", {
             regEx: SchemaRegEx.Url,
             regExMessage: "is not a valid URL",
             optional: true
+        },
+        'a.b.c': {
+            type: String,
+            label: "Subdocument field value",
+            optional: true
         }
     }
 });
@@ -185,6 +190,25 @@ Persons.allow({
     fetch: []
 });
 
+ContactForm = new AutoForm({
+    name: {
+        type: String,
+        label: "Your name",
+        max: 50
+    },
+    email: {
+        type: String,
+        regEx: SchemaRegEx.Email,
+        regExMessage: "is not a valid e-mail address",
+        label: "E-mail address"
+    },
+    message: {
+        type: String,
+        label: "Message",
+        max: 1000
+    }
+});
+
 if (Meteor.isClient) {
     Meteor.subscribe("docs");
     Meteor.subscribe("persons");
@@ -209,6 +233,12 @@ if (Meteor.isClient) {
             console.log("Remove Error:", error);
         }
     });
+    
+    ContactForm.callbacks({
+        "sendEmail": function () {
+            console.log(_.toArray(arguments));
+        }
+    });
 
     Template.example.selectedDoc = function() {
         return Documents.findOne(Session.get("selectedDoc"));
@@ -225,19 +255,19 @@ if (Meteor.isClient) {
     Template.example.events({
         'click .docSelect': function(e, t) {
             e.preventDefault();
-            Documents.resetValidation();
+            Documents.simpleSchema().resetValidation();
             Session.set("selectedDoc", this._id);
         },
         'click .docClear': function(e, t) {
             e.preventDefault();
-            Documents.resetValidation();
+            Documents.simpleSchema().resetValidation();
             Session.set("selectedDoc", null);
         }
     });
-    
+
     Template.buttons.events({
         'click button[type=reset]': function(e, t) {
-            Documents.resetValidation();
+            Documents.simpleSchema().resetValidation();
         }
     });
 
@@ -252,7 +282,7 @@ if (Meteor.isClient) {
             {label: "Three", value: 3}
         ];
     });
-    
+
     Handlebars.registerHelper("strSelectOptions", function() {
         return [
             {label: "One", value: "One"},
@@ -269,6 +299,18 @@ if (Meteor.isServer) {
     Meteor.publish("persons", function() {
         return Persons.find();
     });
+
+    Meteor.methods({
+        sendEmail: function(doc) {
+            var text = "Name: " + doc.name + "\n\n"
+                    + "Email: " + doc.email + "\n\n\n\n"
+                    + doc.message;
+
+            console.log("Sent E-mail:\n\n" + text);
+            return true;
+        }
+    });
+
     Meteor.startup(function() {
         //Documents.remove({});
     });

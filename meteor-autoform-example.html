@@ -9,9 +9,9 @@
 <template name="example">
     <div class="container">
         <h1>Meteor Autoform Example</h1>
-        <div class="row">
+        <div class="row" style="margin-bottom: 50px;">
             <div class="col-12 col-lg-8">
-                {{#autoForm collection="Documents" doc=selectedDoc}}
+                {{#autoForm schema="Documents" doc=selectedDoc}}
                 <div class="formWrap">
                     <div class="control-group{{#if afFieldIsInvalid 'requiredString'}} error{{/if}}">
                         {{afFieldLabel 'requiredString'}}
@@ -223,11 +223,20 @@
                         <span class="help-block">{{afFieldMessage 'optionalUrl'}}</span>
                         {{/if}}
                     </div>
+                    <div class="control-group{{#if afFieldIsInvalid 'a.b.c'}} error{{/if}}">
+                        {{afFieldLabel 'a.b.c'}}
+                        {{afFieldInput 'a.b.c'}}
+                        {{#if afFieldIsInvalid 'a.b.c'}}
+                        <span class="help-block">{{afFieldMessage 'a.b.c'}}</span>
+                        {{/if}}
+                    </div>
                 </div>
                 {{> buttons}}
                 {{/autoForm}}
                 <h2>Virtual Field Test</h2>
                 {{> virtualFields}}
+                <h2>Contact Form Test</h2>
+                {{> contactForm}}
             </div>
             <div class="col-12 col-lg-4">
                 {{> docTable}}
@@ -247,7 +256,7 @@
             <tr>
                 <td><button type="button" class="btn-link docSelect">{{requiredString}}</button></td>
                 <td>
-                    {{#autoForm collection='Documents' doc=this}}
+                    {{#autoForm schema='Documents' doc=this}}
                     <button type="submit" class="btn btn-primary remove">Delete</button>
                     {{/autoForm}}
                 </td>
@@ -267,7 +276,7 @@
 </template>
 
 <template name="virtualFields">
-    {{#autoForm collection='Persons'}}
+    {{#autoForm schema='Persons'}}
     <fieldset>
         <legend>Add a Person</legend>
         <div class="control-group{{#if afFieldIsInvalid 'firstName'}} error{{/if}}">
@@ -303,7 +312,7 @@
                 <td>{{lastName}}</td>
                 <td>{{fullName}}</td>
                 <td>
-                    {{#autoForm collection='Persons' doc=this}}
+                    {{#autoForm schema='Persons' doc=this}}
                     <button type="submit" class="btn btn-primary remove">Delete</button>
                     {{/autoForm}}
                 </td>
@@ -311,4 +320,37 @@
             {{/each}}
         </tbody>
     </table>
+</template>
+
+<template name="contactForm">
+    {{#autoForm schema="ContactForm" id="contactForm"}}
+    <fieldset>
+        <legend>Contact Us</legend>
+        <div class="control-group{{#if afFieldIsInvalid 'name'}} error{{/if}}">
+            {{afFieldLabel "name" class="control-label"}}
+            {{afFieldInput "name"}}
+            {{#if afFieldIsInvalid "name"}}
+            <span class="help-block">{{afFieldMessage "name"}}</span>
+            {{/if}}
+        </div>
+        <div class="control-group{{#if afFieldIsInvalid 'email'}} error{{/if}}">
+            {{afFieldLabel "email" class="control-label"}}
+            {{afFieldInput "email"}}
+            {{#if afFieldIsInvalid "email"}}
+            <span class="help-block">{{afFieldMessage "email"}}</span>
+            {{/if}}
+        </div>
+        <div class="control-group{{#if afFieldIsInvalid 'message'}} error{{/if}}">
+            {{afFieldLabel "message" class="control-label"}}
+            {{afFieldInput "message" rows="10"}}
+            {{#if afFieldIsInvalid "message"}}
+            <span class="help-block">{{afFieldMessage "message"}}</span>
+            {{/if}}
+        </div>
+        <div>
+            <button type="button" data-meteor-method="sendEmail" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-default">Reset</button>
+        </div>
+    </fieldset>
+    {{/autoForm}}
 </template>
