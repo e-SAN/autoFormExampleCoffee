@@ -17,7 +17,7 @@
       "autoform": {
         "git": "https://github.com/aldeed/meteor-autoform.git",
         "branch": "master",
-        "commit": "3fa6471fabfd8fdcf37d576919e6323b3fa8bba1"
+        "commit": "170e5245580b6d9d6fe3d05fb1a470137ab93a44"
       },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
