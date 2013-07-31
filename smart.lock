@@ -3,10 +3,8 @@
   "dependencies": {
     "basePackages": {
       "bootstrap-3": {},
-      "autoform": {
-        "git": "https://github.com/aldeed/meteor-autoform.git",
-        "branch": "master"
-      }
+      "collection2": {},
+      "autoform": {}
     },
     "packages": {
       "bootstrap-3": {
@@ -14,19 +12,19 @@
         "tag": "v0.2.8",
         "commit": "8026f0beaa0274849adfcf8c53d919216b5e06ba"
       },
-      "autoform": {
-        "git": "https://github.com/aldeed/meteor-autoform.git",
-        "branch": "master",
-        "commit": "170e5245580b6d9d6fe3d05fb1a470137ab93a44"
-      },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
-        "branch": "master",
-        "commit": "039e363caebd973e591ba9b44031518fb9ac039a"
+        "tag": "v0.1.0",
+        "commit": "f1068b6f20e03ab6afb047d99bdb08baeb27db8f"
+      },
+      "autoform": {
+        "git": "https://github.com/aldeed/meteor-autoform.git",
+        "tag": "v0.1.1",
+        "commit": "980f0ccb0e641751cbb64ab454f7e6d21a98d52c"
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "branch": "master",
+        "tag": "v0.1.0",
         "commit": "24126eaff16c35076f73641b16e7a209328bce42"
       }
     }
