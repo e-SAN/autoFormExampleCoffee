@@ -234,6 +234,11 @@ if (Meteor.isClient) {
         }
     });
     
+    Persons.beforeRemove = function (id) {
+        var name = Persons.findOne(id).fullName;
+        return confirm("Remove " + name + "?");
+    };
+    
     ContactForm.callbacks({
         "sendEmail": function () {
             console.log(_.toArray(arguments));

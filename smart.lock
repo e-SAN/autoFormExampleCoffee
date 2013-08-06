@@ -14,18 +14,18 @@
       },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.1.0",
-        "commit": "f1068b6f20e03ab6afb047d99bdb08baeb27db8f"
+        "tag": "v0.1.1",
+        "commit": "b2311229a7677b4ee339fbe99985ed6f12eb6a88"
       },
       "autoform": {
         "git": "https://github.com/aldeed/meteor-autoform.git",
-        "tag": "v0.1.1",
-        "commit": "980f0ccb0e641751cbb64ab454f7e6d21a98d52c"
+        "tag": "v0.1.3",
+        "commit": "1ab05e2c20ef9107d48561d1ea8540dbf88e1906"
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.1.0",
-        "commit": "24126eaff16c35076f73641b16e7a209328bce42"
+        "tag": "v0.1.2",
+        "commit": "ab8bf488ae06ac56df3b5aa4b9e658db460da16b"
       }
     }
   }
