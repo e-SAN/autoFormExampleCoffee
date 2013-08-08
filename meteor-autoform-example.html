@@ -13,35 +13,35 @@
             <div class="col-12 col-lg-8">
                 {{#autoForm schema="Documents" doc=selectedDoc}}
                 <div class="formWrap">
-                    <div class="control-group{{#if afFieldIsInvalid 'requiredString'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'requiredString'}} has-error{{/if}}">
                         {{afFieldLabel 'requiredString'}}
                         {{afFieldInput 'requiredString' autofocus='true'}}
                         {{#if afFieldIsInvalid 'requiredString'}}
                         <span class="help-block">{{afFieldMessage 'requiredString'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'optionalString'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'optionalString'}} has-error{{/if}}">
                         {{afFieldLabel 'optionalString'}}
                         {{afFieldInput 'optionalString'}}
                         {{#if afFieldIsInvalid 'optionalString'}}
                         <span class="help-block">{{afFieldMessage 'optionalString'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'labelString'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'labelString'}} has-error{{/if}}">
                         {{afFieldLabel 'labelString'}}
                         {{afFieldInput 'labelString'}}
                         {{#if afFieldIsInvalid 'labelString'}}
                         <span class="help-block">{{afFieldMessage 'labelString'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'longString'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'longString'}} has-error{{/if}}">
                         {{afFieldLabel 'longString'}}
                         {{afFieldInput 'longString' rows="5"}}
                         {{#if afFieldIsInvalid 'longString'}}
                         <span class="help-block">{{afFieldMessage 'longString'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'maxString'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'maxString'}} has-error{{/if}}">
                         {{afFieldLabel 'maxString'}}
                         <span class="help-block">Allows a max of 10 characters, but optional</span>
                         {{afFieldInput 'maxString'}}
@@ -49,7 +49,7 @@
                         <span class="help-block">{{afFieldMessage 'maxString'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'minString'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'minString'}} has-error{{/if}}">
                         {{afFieldLabel 'minString'}}
                         <span class="help-block">Allows a min of 10 characters, but optional</span>
                         {{afFieldInput 'minString'}}
@@ -57,61 +57,61 @@
                         <span class="help-block">{{afFieldMessage 'minString'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'requiredBoolean'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'requiredBoolean'}} has-error{{/if}}">
                         {{afFieldInput 'requiredBoolean'}}
                         {{#if afFieldIsInvalid 'requiredBoolean'}}
                         <span class="help-block">{{afFieldMessage 'requiredBoolean'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'optionalBoolean'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'optionalBoolean'}} has-error{{/if}}">
                         {{afFieldInput 'optionalBoolean'}}
                         {{#if afFieldIsInvalid 'optionalBoolean'}}
                         <span class="help-block">{{afFieldMessage 'optionalBoolean'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'radioBoolean'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'radioBoolean'}} has-error{{/if}}">
                         {{afFieldLabel 'radioBoolean'}}
                         {{afFieldInput 'radioBoolean' radio="true" trueLabel="Yes" falseLabel="No"}}
                         {{#if afFieldIsInvalid 'radioBoolean'}}
                         <span class="help-block">{{afFieldMessage 'radioBoolean'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'selectBoolean'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'selectBoolean'}} has-error{{/if}}">
                         {{afFieldLabel 'selectBoolean'}}
                         {{afFieldInput 'selectBoolean' select="true" trueLabel="Yes" falseLabel="No"}}
                         {{#if afFieldIsInvalid 'selectBoolean'}}
                         <span class="help-block">{{afFieldMessage 'selectBoolean'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'requiredSelect'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'requiredSelect'}} has-error{{/if}}">
                         {{afFieldLabel 'requiredSelect'}}
                         {{afFieldInput 'requiredSelect' options=numSelectOptions}}
                         {{#if afFieldIsInvalid 'requiredSelect'}}
                         <span class="help-block">{{afFieldMessage 'requiredSelect'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'optionalSelect'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'optionalSelect'}} has-error{{/if}}">
                         {{afFieldLabel 'optionalSelect'}}
                         {{afFieldInput 'optionalSelect' options=strSelectOptions}}
                         {{#if afFieldIsInvalid 'optionalSelect'}}
                         <span class="help-block">{{afFieldMessage 'optionalSelect'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'firstOptionSelect'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'firstOptionSelect'}} has-error{{/if}}">
                         {{afFieldLabel 'firstOptionSelect'}}
                         {{afFieldInput 'firstOptionSelect' firstOption="(Select Something)" options=numSelectOptions}}
                         {{#if afFieldIsInvalid 'firstOptionSelect'}}
                         <span class="help-block">{{afFieldMessage 'firstOptionSelect'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'firstOptionRequiredSelect'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'firstOptionRequiredSelect'}} has-error{{/if}}">
                         {{afFieldLabel 'firstOptionRequiredSelect'}}
                         {{afFieldInput 'firstOptionRequiredSelect' firstOption="(Select Something)" options=numSelectOptions}}
                         {{#if afFieldIsInvalid 'firstOptionRequiredSelect'}}
                         <span class="help-block">{{afFieldMessage 'firstOptionRequiredSelect'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'maxSelect'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'maxSelect'}} has-error{{/if}}">
                         {{afFieldLabel 'maxSelect'}}
                         <span class="help-block">Select no more than two options</span>
                         {{afFieldInput 'maxSelect' options=numSelectOptions}}
@@ -119,7 +119,7 @@
                         <span class="help-block">{{afFieldMessage 'maxSelect'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'minSelect'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'minSelect'}} has-error{{/if}}">
                         {{afFieldLabel 'minSelect'}}
                         <span class="help-block">Select at least two options</span>
                         {{afFieldInput 'minSelect' options=numSelectOptions}}
@@ -127,21 +127,21 @@
                         <span class="help-block">{{afFieldMessage 'minSelect'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'requiredNumber'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'requiredNumber'}} has-error{{/if}}">
                         {{afFieldLabel 'requiredNumber'}}
                         {{afFieldInput 'requiredNumber'}}
                         {{#if afFieldIsInvalid 'requiredNumber'}}
                         <span class="help-block">{{afFieldMessage 'requiredNumber'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'optionalNumber'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'optionalNumber'}} has-error{{/if}}">
                         {{afFieldLabel 'optionalNumber'}}
                         {{afFieldInput 'optionalNumber'}}
                         {{#if afFieldIsInvalid 'optionalNumber'}}
                         <span class="help-block">{{afFieldMessage 'optionalNumber'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'maxNumber'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'maxNumber'}} has-error{{/if}}">
                         {{afFieldLabel 'maxNumber'}}
                         <span class="help-block">Enter a number less than 10</span>
                         {{afFieldInput 'maxNumber'}}
@@ -149,7 +149,7 @@
                         <span class="help-block">{{afFieldMessage 'maxNumber'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'minNumber'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'minNumber'}} has-error{{/if}}">
                         {{afFieldLabel 'minNumber'}}
                         <span class="help-block">Enter a number more than 10</span>
                         {{afFieldInput 'minNumber'}}
@@ -157,7 +157,7 @@
                         <span class="help-block">{{afFieldMessage 'minNumber'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'decimal'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'decimal'}} has-error{{/if}}">
                         {{afFieldLabel 'decimal'}}
                         <span class="help-block">Decimal number is OK</span>
                         {{afFieldInput 'decimal' step="0.01"}}
@@ -165,21 +165,21 @@
                         <span class="help-block">{{afFieldMessage 'decimal'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'requiredDate'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'requiredDate'}} has-error{{/if}}">
                         {{afFieldLabel 'requiredDate'}}
                         {{afFieldInput 'requiredDate'}}
                         {{#if afFieldIsInvalid 'requiredDate'}}
                         <span class="help-block">{{afFieldMessage 'requiredDate'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'optionalDate'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'optionalDate'}} has-error{{/if}}">
                         {{afFieldLabel 'optionalDate'}}
                         {{afFieldInput 'optionalDate'}}
                         {{#if afFieldIsInvalid 'optionalDate'}}
                         <span class="help-block">{{afFieldMessage 'optionalDate'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'minDate'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'minDate'}} has-error{{/if}}">
                         {{afFieldLabel 'minDate'}}
                         <span class="help-block">Enter a date on or after 1 January 2013</span>
                         {{afFieldInput 'minDate'}}
@@ -187,7 +187,7 @@
                         <span class="help-block">{{afFieldMessage 'minDate'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'maxDate'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'maxDate'}} has-error{{/if}}">
                         {{afFieldLabel 'maxDate'}}
                         <span class="help-block">Enter a date on or before 31 December 2012</span>
                         {{afFieldInput 'maxDate'}}
@@ -195,35 +195,35 @@
                         <span class="help-block">{{afFieldMessage 'maxDate'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'requiredEmail'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'requiredEmail'}} has-error{{/if}}">
                         {{afFieldLabel 'requiredEmail'}}
                         {{afFieldInput 'requiredEmail'}}
                         {{#if afFieldIsInvalid 'requiredEmail'}}
                         <span class="help-block">{{afFieldMessage 'requiredEmail'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'optionalEmail'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'optionalEmail'}} has-error{{/if}}">
                         {{afFieldLabel 'optionalEmail'}}
                         {{afFieldInput 'optionalEmail'}}
                         {{#if afFieldIsInvalid 'optionalEmail'}}
                         <span class="help-block">{{afFieldMessage 'optionalEmail'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'requiredUrl'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'requiredUrl'}} has-error{{/if}}">
                         {{afFieldLabel 'requiredUrl'}}
                         {{afFieldInput 'requiredUrl'}}
                         {{#if afFieldIsInvalid 'requiredUrl'}}
                         <span class="help-block">{{afFieldMessage 'requiredUrl'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'optionalUrl'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'optionalUrl'}} has-error{{/if}}">
                         {{afFieldLabel 'optionalUrl'}}
                         {{afFieldInput 'optionalUrl'}}
                         {{#if afFieldIsInvalid 'optionalUrl'}}
                         <span class="help-block">{{afFieldMessage 'optionalUrl'}}</span>
                         {{/if}}
                     </div>
-                    <div class="control-group{{#if afFieldIsInvalid 'a.b.c'}} error{{/if}}">
+                    <div class="form-group{{#if afFieldIsInvalid 'a.b.c'}} has-error{{/if}}">
                         {{afFieldLabel 'a.b.c'}}
                         {{afFieldInput 'a.b.c'}}
                         {{#if afFieldIsInvalid 'a.b.c'}}
@@ -238,7 +238,45 @@
                 <h2>Contact Form Test</h2>
                 {{> contactForm}}
                 <h2>Quick Form Test</h2>
+                <div class="formWrap">
                 {{quickForm schema="Documents" type="insert" id="myQuickForm" buttonContent="Insert" buttonClasses="btn btn-primary"}}
+                </div>
+                <h2>Quick Field Test</h2>
+                {{#autoForm schema="Documents" doc=selectedDoc}}
+                <div class="formWrap">
+                    {{afQuickField 'requiredString' autofocus='true'}}
+                    {{afQuickField 'optionalString'}}
+                    {{afQuickField 'labelString' style="color: orange" label-style="color: green"}}
+                    {{afQuickField "longString" rows="5"}}
+                    {{afQuickField "maxString"}}
+                    {{afQuickField "minString"}}
+                    {{afQuickField "requiredBoolean"}}
+                    {{afQuickField "optionalBoolean"}}
+                    {{afQuickField "radioBoolean" radio="true" trueLabel="Yes" falseLabel="No"}}
+                    {{afQuickField "selectBoolean" select="true" trueLabel="Yes" falseLabel="No"}}
+                    {{afQuickField "requiredSelect" options=numSelectOptions noselect="true"}}
+                    {{afQuickField "optionalSelect" options=strSelectOptions}}
+                    {{afQuickField "firstOptionSelect" firstOption="(Select Something)" options=numSelectOptions}}
+                    {{afQuickField "firstOptionRequiredSelect" firstOption="(Select Something)" options=numSelectOptions}}
+                    {{afQuickField "maxSelect" options=numSelectOptions noselect="true"}}
+                    {{afQuickField "minSelect" options=numSelectOptions}}
+                    {{afQuickField "requiredNumber"}}
+                    {{afQuickField "optionalNumber"}}
+                    {{afQuickField "maxNumber"}}
+                    {{afQuickField "minNumber"}}
+                    {{afQuickField "decimal" step="0.01"}}
+                    {{afQuickField "requiredDate"}}
+                    {{afQuickField "optionalDate"}}
+                    {{afQuickField "minDate"}}
+                    {{afQuickField "maxDate"}}
+                    {{afQuickField "requiredEmail"}}
+                    {{afQuickField "optionalEmail"}}
+                    {{afQuickField "requiredUrl"}}
+                    {{afQuickField "optionalUrl"}}
+                    {{afQuickField "a.b.c"}}
+                </div>
+                {{> buttons}}
+                {{/autoForm}}
             </div>
             <div class="col-12 col-lg-4">
                 {{> docTable}}
@@ -281,14 +319,14 @@
     {{#autoForm schema='Persons'}}
     <fieldset>
         <legend>Add a Person</legend>
-        <div class="control-group{{#if afFieldIsInvalid 'firstName'}} error{{/if}}">
+        <div class="form-group{{#if afFieldIsInvalid 'firstName'}} has-error{{/if}}">
             {{afFieldLabel 'firstName'}}
             {{afFieldInput 'firstName'}}
             {{#if afFieldIsInvalid 'firstName'}}
             <span class="help-block">{{afFieldMessage 'firstName'}}</span>
             {{/if}}
         </div>
-        <div class="control-group{{#if afFieldIsInvalid 'lastName'}} error{{/if}}">
+        <div class="form-group{{#if afFieldIsInvalid 'lastName'}} has-error{{/if}}">
             {{afFieldLabel 'lastName'}}
             {{afFieldInput 'lastName'}}
             {{#if afFieldIsInvalid 'lastName'}}
@@ -328,21 +366,21 @@
     {{#autoForm schema="ContactForm" id="contactForm"}}
     <fieldset>
         <legend>Contact Us</legend>
-        <div class="control-group{{#if afFieldIsInvalid 'name'}} error{{/if}}">
+        <div class="form-group{{#if afFieldIsInvalid 'name'}} has-error{{/if}}">
             {{afFieldLabel "name" class="control-label"}}
             {{afFieldInput "name"}}
             {{#if afFieldIsInvalid "name"}}
             <span class="help-block">{{afFieldMessage "name"}}</span>
             {{/if}}
         </div>
-        <div class="control-group{{#if afFieldIsInvalid 'email'}} error{{/if}}">
+        <div class="form-group{{#if afFieldIsInvalid 'email'}} has-error{{/if}}">
             {{afFieldLabel "email" class="control-label"}}
             {{afFieldInput "email"}}
             {{#if afFieldIsInvalid "email"}}
             <span class="help-block">{{afFieldMessage "email"}}</span>
             {{/if}}
         </div>
-        <div class="control-group{{#if afFieldIsInvalid 'message'}} error{{/if}}">
+        <div class="form-group{{#if afFieldIsInvalid 'message'}} has-error{{/if}}">
             {{afFieldLabel "message" class="control-label"}}
             {{afFieldInput "message" rows="10"}}
             {{#if afFieldIsInvalid "message"}}
