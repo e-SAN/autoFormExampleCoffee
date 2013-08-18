@@ -67,13 +67,13 @@ Documents = new Meteor.Collection2("documents", {
             type: [Number],
             allowedValues: [1, 2, 3],
             optional: true,
-            max: 2
+            maxCount: 2
         },
         minSelect: {
             type: [Number],
             allowedValues: [1, 2, 3],
             optional: true,
-            min: 2
+            minCount: 2
         },
         requiredNumber: {
             type: Number

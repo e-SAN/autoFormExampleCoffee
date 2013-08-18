@@ -239,9 +239,9 @@
                 {{> contactForm}}
                 <h2>Quick Form Test</h2>
                 <div class="formWrap">
-                {{quickForm schema="Documents" type="insert" id="myQuickForm" buttonContent="Insert" buttonClasses="btn btn-primary"}}
+                {{quickForm schema="Documents" validation="keyup" type="insert" id="myQuickForm" buttonContent="Insert" buttonClasses="btn btn-primary"}}
                 </div>
-                <h2>Quick Field Test</h2>
+<!--                <h2>Quick Field Test</h2>
                 {{#autoForm schema="Documents" doc=selectedDoc}}
                 <div class="formWrap">
                     {{afQuickField 'requiredString' autofocus='true'}}
@@ -276,7 +276,7 @@
                     {{afQuickField "a.b.c"}}
                 </div>
                 {{> buttons}}
-                {{/autoForm}}
+                {{/autoForm}}-->
             </div>
             <div class="col-12 col-lg-4">
                 {{> docTable}}
@@ -363,7 +363,7 @@
 </template>
 
 <template name="contactForm">
-    {{#autoForm schema="ContactForm" id="contactForm"}}
+    {{#autoForm schema="ContactForm" id="contactForm" validation="keyup"}}
     <fieldset>
         <legend>Contact Us</legend>
         <div class="form-group{{#if afFieldIsInvalid 'name'}} has-error{{/if}}">

@@ -3,29 +3,30 @@
   "dependencies": {
     "basePackages": {
       "bootstrap-3": {},
+      "simple-schema": {},
       "collection2": {},
-      "autoform": {}
+      "autoform": {
+        "path": "../meteor-autoform"
+      }
     },
     "packages": {
       "bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
-        "tag": "v0.2.8",
-        "commit": "8026f0beaa0274849adfcf8c53d919216b5e06ba"
-      },
-      "collection2": {
-        "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.1.2",
-        "commit": "ea5164b52077c1082505e35dc16889545c8b21cb"
-      },
-      "autoform": {
-        "git": "https://github.com/aldeed/meteor-autoform.git",
-        "tag": "v0.1.4",
-        "commit": "586cebd949e097dacf08c90b42a631dad82cc6af"
+        "tag": "v0.3.2",
+        "commit": "a09f87b01f625ca86d97f93206e7ff475cf3db3b"
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.1.2",
-        "commit": "ab8bf488ae06ac56df3b5aa4b9e658db460da16b"
+        "tag": "v0.1.6",
+        "commit": "49095aca5199a6356243144ad3a9f529d835210c"
+      },
+      "collection2": {
+        "git": "https://github.com/aldeed/meteor-collection2.git",
+        "tag": "v0.1.3",
+        "commit": "a8066879159e111eff0c58d62aaa4d54b8174d15"
+      },
+      "autoform": {
+        "path": "../meteor-autoform"
       }
     }
   }
