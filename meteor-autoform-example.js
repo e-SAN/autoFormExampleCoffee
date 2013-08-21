@@ -157,6 +157,10 @@ Documents.allow({
     fetch: []
 });
 
+Documents.simpleSchema().messages({
+    noD: "No Ds allowed!!!"
+});
+
 Persons = new Meteor.Collection2("persons", {
     schema: {
         firstName: {
@@ -167,7 +171,8 @@ Persons = new Meteor.Collection2("persons", {
         lastName: {
             type: String,
             label: "Last name",
-            max: 30
+            max: 30,
+            unique: true
         }
     },
     virtualFields: {
@@ -188,6 +193,10 @@ Persons.allow({
         return true;
     },
     fetch: []
+});
+
+Persons.simpleSchema().messages({
+    notUnique: "Only one of each last name allowed"
 });
 
 ContactForm = new AutoForm({
@@ -234,6 +243,13 @@ if (Meteor.isClient) {
         }
     });
     
+    Documents.simpleSchema().validator(function (key, val, def) {
+        if (val === "d") {
+            return "noD";
+        }
+        return true;
+    });
+    
     Persons.beforeRemove = function (id) {
         var name = Persons.findOne(id).fullName;
         return confirm("Remove " + name + "?");
@@ -244,6 +260,10 @@ if (Meteor.isClient) {
             console.log(_.toArray(arguments));
         }
     });
+    
+    Template.example.schema = function() {
+        return Documents;
+    };
 
     Template.example.selectedDoc = function() {
         return Documents.findOne(Session.get("selectedDoc"));
@@ -260,12 +280,12 @@ if (Meteor.isClient) {
     Template.example.events({
         'click .docSelect': function(e, t) {
             e.preventDefault();
-            Documents.simpleSchema().resetValidation();
+            Documents.resetForm("docForm");
             Session.set("selectedDoc", this._id);
         },
         'click .docClear': function(e, t) {
             e.preventDefault();
-            Documents.simpleSchema().resetValidation();
+            Documents.resetForm("docForm");
             Session.set("selectedDoc", null);
         }
     });

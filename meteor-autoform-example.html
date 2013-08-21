@@ -11,7 +11,7 @@
         <h1>Meteor Autoform Example</h1>
         <div class="row" style="margin-bottom: 50px;">
             <div class="col-12 col-lg-8">
-                {{#autoForm schema="Documents" doc=selectedDoc}}
+                {{#autoForm schema=schema doc=selectedDoc id="docForm"}}
                 <div class="formWrap">
                     <div class="form-group{{#if afFieldIsInvalid 'requiredString'}} has-error{{/if}}">
                         {{afFieldLabel 'requiredString'}}
@@ -239,10 +239,10 @@
                 {{> contactForm}}
                 <h2>Quick Form Test</h2>
                 <div class="formWrap">
-                {{quickForm schema="Documents" validation="keyup" type="insert" id="myQuickForm" buttonContent="Insert" buttonClasses="btn btn-primary"}}
+                {{quickForm schema=schema validation="keyup" type="insert" id="myQuickForm" buttonContent="Insert" buttonClasses="btn btn-primary"}}
                 </div>
 <!--                <h2>Quick Field Test</h2>
-                {{#autoForm schema="Documents" doc=selectedDoc}}
+                {{#autoForm schema="Documents" doc=selectedDoc id="quickFieldTest"}}
                 <div class="formWrap">
                     {{afQuickField 'requiredString' autofocus='true'}}
                     {{afQuickField 'optionalString'}}
@@ -316,7 +316,7 @@
 </template>
 
 <template name="virtualFields">
-    {{#autoForm schema='Persons'}}
+    {{#autoForm schema='Persons' validation="keyup"}}
     <fieldset>
         <legend>Add a Person</legend>
         <div class="form-group{{#if afFieldIsInvalid 'firstName'}} has-error{{/if}}">
