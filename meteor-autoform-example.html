@@ -11,7 +11,7 @@
         <h1>Meteor Autoform Example</h1>
         <div class="row" style="margin-bottom: 50px;">
             <div class="col-12 col-lg-8">
-                {{#autoForm schema=schema doc=selectedDoc id="docForm"}}
+                {{#autoForm schema=schema doc=selectedDoc id="docForm" novalidate="novalidate"}}
                 <div class="formWrap">
                     <div class="form-group{{#if afFieldIsInvalid 'requiredString'}} has-error{{/if}}">
                         {{afFieldLabel 'requiredString'}}
@@ -237,12 +237,14 @@
                 {{> virtualFields}}
                 <h2>Contact Form Test</h2>
                 {{> contactForm}}
+                <h2>Normal Submit Form</h2>
+                {{> normalSubmitForm}}
                 <h2>Quick Form Test</h2>
                 <div class="formWrap">
-                {{quickForm schema=schema validation="keyup" type="insert" id="myQuickForm" buttonContent="Insert" buttonClasses="btn btn-primary"}}
+                {{quickForm schema=schema validation="keyup" type="insert" id="myQuickForm" buttonContent="Insert" buttonClasses="btn btn-primary" novalidate="novalidate"}}
                 </div>
 <!--                <h2>Quick Field Test</h2>
-                {{#autoForm schema="Documents" doc=selectedDoc id="quickFieldTest"}}
+                {{#autoForm schema="Documents" doc=selectedDoc id="quickFieldTest" novalidate="novalidate"}}
                 <div class="formWrap">
                     {{afQuickField 'requiredString' autofocus='true'}}
                     {{afQuickField 'optionalString'}}
@@ -296,7 +298,7 @@
             <tr>
                 <td><button type="button" class="btn-link docSelect">{{requiredString}}</button></td>
                 <td>
-                    {{#autoForm schema='Documents' doc=this}}
+                    {{#autoForm schema='Documents' doc=this novalidate="novalidate"}}
                     <button type="submit" class="btn btn-primary remove">Delete</button>
                     {{/autoForm}}
                 </td>
@@ -316,7 +318,7 @@
 </template>
 
 <template name="virtualFields">
-    {{#autoForm schema='Persons' validation="keyup"}}
+    {{#autoForm schema='Persons' validation="keyup" novalidate="novalidate"}}
     <fieldset>
         <legend>Add a Person</legend>
         <div class="form-group{{#if afFieldIsInvalid 'firstName'}} has-error{{/if}}">
@@ -352,7 +354,7 @@
                 <td>{{lastName}}</td>
                 <td>{{fullName}}</td>
                 <td>
-                    {{#autoForm schema='Persons' doc=this}}
+                    {{#autoForm schema='Persons' doc=this novalidate="novalidate"}}
                     <button type="submit" class="btn btn-primary remove">Delete</button>
                     {{/autoForm}}
                 </td>
@@ -363,7 +365,7 @@
 </template>
 
 <template name="contactForm">
-    {{#autoForm schema="ContactForm" id="contactForm" validation="keyup"}}
+    {{#autoForm schema="ContactForm" id="contactForm" onSubmit=onSubmit novalidate="novalidate"}}
     <fieldset>
         <legend>Contact Us</legend>
         <div class="form-group{{#if afFieldIsInvalid 'name'}} has-error{{/if}}">
@@ -388,7 +390,22 @@
             {{/if}}
         </div>
         <div>
-            <button type="button" data-meteor-method="sendEmail" class="btn btn-primary">Submit</button>
+            <button type="submit" data-meteor-method="sendEmail" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-default">Reset</button>
+        </div>
+    </fieldset>
+    {{/autoForm}}
+</template>
+
+<template name="normalSubmitForm">
+    {{#autoForm schema="ContactForm" id="contactForm" novalidate="novalidate" action="/fake" method="post"}}
+    <fieldset>
+        <legend>Contact Us</legend>
+        {{afQuickField "name"}}
+        {{afQuickField "email"}}
+        {{afQuickField "message" rows="10"}}
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
             <button type="reset" class="btn btn-default">Reset</button>
         </div>
     </fieldset>

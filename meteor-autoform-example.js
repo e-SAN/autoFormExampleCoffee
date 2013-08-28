@@ -261,6 +261,14 @@ if (Meteor.isClient) {
         }
     });
     
+    Template.contactForm.onSubmit = function () {
+        return function () {
+            console.log(_.toArray(arguments));
+            this.resetForm();
+            //return false;
+        };
+    };
+    
     Template.example.schema = function() {
         return Documents;
     };
