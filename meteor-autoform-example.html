@@ -318,7 +318,7 @@
 </template>
 
 <template name="virtualFields">
-    {{#autoForm schema='Persons' validation="keyup" novalidate="novalidate"}}
+    {{#autoForm schema='Persons' validation="keyup" novalidate="novalidate" id="personsForm"}}
     <fieldset>
         <legend>Add a Person</legend>
         <div class="form-group{{#if afFieldIsInvalid 'firstName'}} has-error{{/if}}">
@@ -398,7 +398,7 @@
 </template>
 
 <template name="normalSubmitForm">
-    {{#autoForm schema="ContactForm" id="contactForm" novalidate="novalidate" action="/fake" method="post"}}
+    {{#autoForm schema="ContactForm" id="contactForm2" novalidate="novalidate" action="/fake" method="post"}}
     <fieldset>
         <legend>Contact Us</legend>
         {{afQuickField "name"}}

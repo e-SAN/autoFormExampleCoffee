@@ -117,23 +117,19 @@ Documents = new Meteor.Collection2("documents", {
         requiredEmail: {
             type: String,
             regEx: SchemaRegEx.Email,
-            regExMessage: "is not a valid e-mail address"
         },
         optionalEmail: {
             type: String,
             regEx: SchemaRegEx.Email,
-            regExMessage: "is not a valid e-mail address",
             optional: true
         },
         requiredUrl: {
             type: String,
             regEx: SchemaRegEx.Url,
-            regExMessage: "is not a valid URL"
         },
         optionalUrl: {
             type: String,
             regEx: SchemaRegEx.Url,
-            regExMessage: "is not a valid URL",
             optional: true
         },
         'a.b.c': {
@@ -158,11 +154,19 @@ Documents.allow({
 });
 
 Documents.simpleSchema().messages({
-    noD: "No Ds allowed!!!"
+    noD: "No Ds allowed!!!",
+    'regEx requiredEmail': "[label] is not a valid e-mail address",
+    'regEx optionalEmail': "[label] is not a valid e-mail address",
+    'regEx requiredUrl': "[label] is not a valid URL",
+    'regEx optionalUrl': "[label] is not a valid URL"
 });
 
 Persons = new Meteor.Collection2("persons", {
     schema: {
+        _id: {
+            type: String,
+            optional: true
+        },
         firstName: {
             type: String,
             label: "First name",
@@ -208,7 +212,6 @@ ContactForm = new AutoForm({
     email: {
         type: String,
         regEx: SchemaRegEx.Email,
-        regExMessage: "is not a valid e-mail address",
         label: "E-mail address"
     },
     message: {
@@ -216,6 +219,10 @@ ContactForm = new AutoForm({
         label: "Message",
         max: 1000
     }
+});
+
+ContactForm.simpleSchema().messages({
+    'regEx email': "[label] is not a valid e-mail address"
 });
 
 if (Meteor.isClient) {
@@ -242,33 +249,33 @@ if (Meteor.isClient) {
             console.log("Remove Error:", error);
         }
     });
-    
-    Documents.simpleSchema().validator(function (key, val, def) {
+
+    Documents.simpleSchema().validator(function(key, val, def) {
         if (val === "d") {
             return "noD";
         }
         return true;
     });
-    
-    Persons.beforeRemove = function (id) {
+
+    Persons.beforeRemove = function(id) {
         var name = Persons.findOne(id).fullName;
         return confirm("Remove " + name + "?");
     };
-    
+
     ContactForm.callbacks({
-        "sendEmail": function () {
+        "sendEmail": function() {
             console.log(_.toArray(arguments));
         }
     });
-    
-    Template.contactForm.onSubmit = function () {
-        return function () {
+
+    Template.contactForm.onSubmit = function() {
+        return function() {
             console.log(_.toArray(arguments));
             this.resetForm();
             //return false;
         };
     };
-    
+
     Template.example.schema = function() {
         return Documents;
     };
@@ -295,12 +302,6 @@ if (Meteor.isClient) {
             e.preventDefault();
             Documents.resetForm("docForm");
             Session.set("selectedDoc", null);
-        }
-    });
-
-    Template.buttons.events({
-        'click button[type=reset]': function(e, t) {
-            Documents.simpleSchema().resetValidation();
         }
     });
 
