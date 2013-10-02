@@ -5,28 +5,28 @@
       "bootstrap-3": {},
       "simple-schema": {},
       "collection2": {},
-      "autoform": {}
+      "autoform": {
+        "path": "../meteor-autoform"
+      }
     },
     "packages": {
       "bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
-        "tag": "v0.3.4",
-        "commit": "680c056e849d079a1b669247f347da2b443aad91"
+        "tag": "v0.3.5",
+        "commit": "47996f67f3987c9f82117394effcbe1586a4fe29"
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.1",
-        "commit": "9f3e6fcdfea2c5a2295a25e23eac34b48f9d14f6"
+        "tag": "v0.2.8",
+        "commit": "613c1df092a92aeefc3bcaa776ba259e7c3e4cf4"
       },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.2.1",
-        "commit": "6dc452b0c6353ad4a099a0e8d89ee36bdab28cd3"
+        "tag": "v0.2.10",
+        "commit": "7c1adcaab2e8b9bc2de3730d1fe2b5305508f5fe"
       },
       "autoform": {
-        "git": "https://github.com/aldeed/meteor-autoform.git",
-        "tag": "v0.3.0",
-        "commit": "3eca608eb046997c9e83362c3bf138b5040d321e"
+        "path": "../meteor-autoform"
       }
     }
   }
