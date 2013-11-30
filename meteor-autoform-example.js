@@ -49,7 +49,7 @@ Documents = new Meteor.Collection2("documents", {
     },
     optionalSelect: {
       type: String,
-      allowedValues: ["One", "Two", "Three"],
+      allowedValues: ["one", "two", "three"],
       optional: true
     },
     firstOptionSelect: {
@@ -211,7 +211,7 @@ Persons.simpleSchema().messages({
   notUnique: "Only one of each last name allowed"
 });
 
-ContactForm = new AutoForm({
+ContactFormSchema = new SimpleSchema({
   name: {
     type: String,
     label: "Your name",
@@ -228,8 +228,7 @@ ContactForm = new AutoForm({
     max: 1000
   }
 });
-
-ContactForm.simpleSchema().messages({
+ContactFormSchema.messages({
   'regEx email': "[label] is not a valid e-mail address"
 });
 
@@ -268,6 +267,11 @@ if (Meteor.isClient) {
   Meteor.subscribe("persons");
   Meteor.subscribe("dates");
 
+  ContactForm = new AutoForm(ContactFormSchema);
+  DocumentsForm = new AutoForm(Documents);
+  DatesForm = new AutoForm(Dates);
+  PersonsForm = new AutoForm(Persons);
+
   var cb = {
     insert: function(error, result) {
       if (error) {
@@ -289,20 +293,25 @@ if (Meteor.isClient) {
   };
 
   Meteor.startup(function() {
-    Documents.callbacks(cb);
-    Dates.callbacks({
-      insert: function(error, result) {
-        if (error) {
-          console.log("Insert Error:", error);
-          console.log(Dates.namedContext("default").invalidKeys());
-        } else {
-          console.log("Inserted:", Dates.findOne(result));
+    DocumentsForm.hooks({
+      after: cb
+    });
+
+    DatesForm.hooks({
+      after: {
+        insert: function(error, result) {
+          if (error) {
+            console.log("Insert Error:", error);
+            console.log(Dates.simpleSchema().namedContext().invalidKeys());
+          } else {
+            console.log("Inserted:", Dates.findOne(result));
+          }
         }
       }
     });
-    
-    Deps.autorun(function () {
-      var ctx = Documents.namedContext("docForm");
+
+    Deps.autorun(function() {
+      var ctx = Documents.simpleSchema().namedContext("docForm");
       if (!ctx.isValid()) {
         console.log(ctx.invalidKeys());
       }
@@ -315,25 +324,28 @@ if (Meteor.isClient) {
     }
     return true;
   });
-
-  Persons.beforeRemove = function(id) {
-    var name = Persons.findOne(id).fullName;
-    return confirm("Remove " + name + "?");
-  };
-
-  ContactForm.callbacks({
-    "sendEmail": function() {
-      console.log(_.toArray(arguments));
+  
+  PersonsForm.hooks({
+    before: {
+      remove: function(id) {
+        var name = Persons.findOne(id).fullName;
+        return confirm("Remove " + name + "?");
+      }
     }
   });
 
-  Template.contactForm.onSubmit = function() {
-    return function() {
+  ContactForm.hooks({
+    after: {
+      "sendEmail": function() {
+        console.log(_.toArray(arguments));
+      }
+    },
+    onSubmit: function() {
       console.log(_.toArray(arguments));
       this.resetForm();
       //return false;
-    };
-  };
+    }
+  });
 
   Template.example.schema = function() {
     return Documents;
@@ -366,12 +378,12 @@ if (Meteor.isClient) {
   Template.example.events({
     'click .docSelect': function(e, t) {
       e.preventDefault();
-      Documents.resetForm("docForm");
+      AutoForm.resetForm("docForm", Documents.simpleSchema());
       Session.set("selectedDoc", this._id);
     },
     'click .docClear': function(e, t) {
       e.preventDefault();
-      Documents.resetForm("docForm");
+      AutoForm.resetForm("docForm", Documents.simpleSchema());
       Session.set("selectedDoc", null);
     }
   });
@@ -385,14 +397,6 @@ if (Meteor.isClient) {
       {label: "One", value: 1},
       {label: "Two", value: 2},
       {label: "Three", value: 3}
-    ];
-  });
-
-  Handlebars.registerHelper("strSelectOptions", function() {
-    return [
-      {label: "One", value: "One"},
-      {label: "Two", value: "Two"},
-      {label: "Three", value: "Three"}
     ];
   });
 }
@@ -410,6 +414,7 @@ if (Meteor.isServer) {
 
   Meteor.methods({
     sendEmail: function(doc) {
+      check(doc, ContactFormSchema);
       var text = "Name: " + doc.name + "\n\n"
               + "Email: " + doc.email + "\n\n\n\n"
               + doc.message;
