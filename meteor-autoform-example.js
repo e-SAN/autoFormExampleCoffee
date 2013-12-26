@@ -348,7 +348,7 @@ if (Meteor.isClient) {
   });
 
   Template.example.schema = function() {
-    return Documents;
+    return DocumentsForm;
   };
 
   Template.example.selectedDoc = function() {
