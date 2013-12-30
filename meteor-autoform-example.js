@@ -420,6 +420,7 @@ if (Meteor.isServer) {
               + doc.message;
 
       console.log("Sent E-mail:\n\n" + text);
+      sleep(4000);
       return true;
     }
   });
@@ -427,4 +428,9 @@ if (Meteor.isServer) {
   Meteor.startup(function() {
     //Documents.remove({});
   });
+}
+
+function sleep(ms){
+  var done = Date.now() + ms;
+  while(Date.now() < done){ /* do nothing */ } 
 }
