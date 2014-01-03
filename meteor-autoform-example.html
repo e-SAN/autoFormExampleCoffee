@@ -387,7 +387,7 @@
 
 <template name="datesForm">
   {{#autoForm schema="DatesForm" doc=dateDoc id="datesForm1" novalidate="novalidate"}}
-  {{afQuickField "date"}}
+  {{afQuickField "date" value=today}}
   <div>
     <button type="submit" class="btn btn-primary insert">Insert</button>
   </div>

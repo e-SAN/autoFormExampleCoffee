@@ -294,7 +294,13 @@ if (Meteor.isClient) {
 
   Meteor.startup(function() {
     DocumentsForm.hooks({
-      after: cb
+      after: cb,
+      before: {
+        insert: function (doc) {
+          console.log(doc);
+          return doc;
+        }
+      }
     });
 
     DatesForm.hooks({
@@ -356,15 +362,34 @@ if (Meteor.isClient) {
   };
 
   Template.datesForm.dateDoc = function() {
-    return Dates.findOne({_id: "pR95N5sxMTsaXe8e8"});
+    return null;
+    //return Dates.findOne({_id: "pR95N5sxMTsaXe8e8"});
   };
 
   Template.datesForm.dateTimeDoc = function() {
-    return Dates.findOne({_id: "TfFqjdJ6EYfjAdhE3"});
+    return null;
+    //return Dates.findOne({_id: "TfFqjdJ6EYfjAdhE3"});
   };
 
   Template.datesForm.dateTimeLocalDoc = function() {
-    return Dates.findOne({_id: "pMcpm4vxkA5Hq4SyM"});
+    return null;
+    //return Dates.findOne({_id: "pMcpm4vxkA5Hq4SyM"});
+  };
+  
+  Template.datesForm.today = function() {
+    return dateToDateString(new Date);
+  };
+  
+  var dateToDateString = function(date) {
+    var m = (date.getMonth() + 1);
+    if (m < 10) {
+      m = "0" + m;
+    }
+    var d = date.getDate();
+    if (d < 10) {
+      d = "0" + d;
+    }
+    return date.getFullYear() + '-' + m + '-' + d;
   };
 
   Template.docTable.documents = function() {
