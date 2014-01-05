@@ -3,7 +3,7 @@
 </head>
 
 <body>
-  {{> example}}
+  {{> example data=testData}}
 </body>
 
 <template name="example">
@@ -246,12 +246,12 @@
         {{> contactForm}}
         <h2>Normal Submit Form</h2>
         {{> normalSubmitForm}}
-        <!--<h2>Quick Form Test</h2>
+        <h2>Quick Form Test</h2>
         <div class="formWrap">
-          {{> quickForm schema=schema validation="keyup" type="insert" id="myQuickForm" buttonContent="Insert" buttonClasses="btn btn-primary" novalidate="novalidate"}}
+          {{> quickForm schema=schema validation="keyup" type="disabled" id="myQuickForm" buttonClasses="btn btn-primary" novalidate="novalidate"}}
         </div>
         <h2>Dates Test</h2>
-        {{> datesForm}}-->
+        {{> datesForm}}
       </div>
       <div class="col-12 col-lg-4">
         {{> docTable}}

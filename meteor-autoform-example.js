@@ -297,7 +297,7 @@ if (Meteor.isClient) {
       after: cb,
       before: {
         insert: function (doc) {
-          console.log(doc);
+          console.log("before.insert received document", doc);
           return doc;
         }
       }
@@ -307,8 +307,7 @@ if (Meteor.isClient) {
       after: {
         insert: function(error, result) {
           if (error) {
-            console.log("Insert Error:", error);
-            console.log(Dates.simpleSchema().namedContext().invalidKeys());
+            console.log("Insert Error:", error, Dates.simpleSchema().namedContext().invalidKeys());
           } else {
             console.log("Inserted:", Dates.findOne(result));
           }
@@ -319,7 +318,7 @@ if (Meteor.isClient) {
     Deps.autorun(function() {
       var ctx = Documents.simpleSchema().namedContext("docForm");
       if (!ctx.isValid()) {
-        console.log(ctx.invalidKeys());
+        console.log("Invalid keys in Document:", ctx.invalidKeys());
       }
     });
   });
@@ -343,11 +342,11 @@ if (Meteor.isClient) {
   ContactForm.hooks({
     after: {
       "sendEmail": function() {
-        console.log(_.toArray(arguments));
+        console.log("after sendEmail hook");
       }
     },
     onSubmit: function() {
-      console.log(_.toArray(arguments));
+      console.log("onSubmit hook");
       this.resetForm();
       //return false;
     }
@@ -378,6 +377,10 @@ if (Meteor.isClient) {
   
   Template.datesForm.today = function() {
     return dateToDateString(new Date);
+  };
+  
+  UI.body.testData = function () {
+    return {a: "b"};
   };
   
   var dateToDateString = function(date) {
@@ -414,7 +417,7 @@ if (Meteor.isClient) {
   });
 
   Template.virtualFields.persons = function() {
-    return Persons.find();
+    return Persons.find().fetch();
   };
 
   Handlebars.registerHelper("numSelectOptions", function(options) {
@@ -445,7 +448,7 @@ if (Meteor.isServer) {
               + doc.message;
 
       console.log("Sent E-mail:\n\n" + text);
-      sleep(4000);
+      sleep(4000); //simulate real delay
       return true;
     }
   });
