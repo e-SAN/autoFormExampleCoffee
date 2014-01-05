@@ -238,7 +238,8 @@
             {{/if}}
           </div>
         </div>
-        {{> buttons}}
+        <button type="submit" class="btn btn-primary {{docFormType}}">{{#if newDocMode}}Insert{{else}}Update{{/if}}</button>
+        <button type="reset" class="btn btn-default">Reset</button>
         {{/autoForm}}
         <h2>Virtual Field Test</h2>
         {{> virtualFields}}
@@ -279,15 +280,6 @@
       {{/each}}
     </tbody>
   </table>
-</template>
-
-<template name="buttons">
-  {{#if newDocMode}}
-  <button type="submit" class="btn btn-primary insert">Insert</button>
-  {{else}}
-  <button type="submit" class="btn btn-primary update">Update</button>
-  {{/if}}
-  <button type="reset" class="btn btn-default">Reset</button>
 </template>
 
 <template name="virtualFields">

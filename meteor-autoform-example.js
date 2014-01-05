@@ -359,6 +359,10 @@ if (Meteor.isClient) {
   Template.example.selectedDoc = function() {
     return Documents.findOne(Session.get("selectedDoc"));
   };
+  
+  Template.example.newDocMode = function() {
+    return !Session.get("selectedDoc");
+  };
 
   Template.datesForm.dateDoc = function() {
     return null;
@@ -380,7 +384,11 @@ if (Meteor.isClient) {
   };
   
   UI.body.testData = function () {
-    return {a: "b"};
+    if (Session.get("selectedDoc")) {
+      return {docFormType: "update"};
+    } else {
+      return {docFormType: "insert"};
+    }
   };
   
   var dateToDateString = function(date) {
@@ -397,10 +405,6 @@ if (Meteor.isClient) {
 
   Template.docTable.documents = function() {
     return Documents.find();
-  };
-
-  Template.buttons.newDocMode = function() {
-    return !Session.get("selectedDoc");
   };
 
   Template.example.events({
