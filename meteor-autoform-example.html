@@ -248,7 +248,7 @@
         {{> normalSubmitForm}}
         <h2>Quick Form Test</h2>
         <div class="formWrap">
-          {{quickForm schema=schema validation="keyup" type="insert" id="myQuickForm" buttonContent="Insert" buttonClasses="btn btn-primary" novalidate="novalidate"}}
+          {{quickForm schema=schema validation="keyup" type="insert" id="myQuickForm" template="myField" buttonContent="Insert" buttonClasses="btn btn-primary" novalidate="novalidate" fields="a.b.c,optionalUrl"}}
         </div>
         <h2>Dates Test</h2>
         {{> datesForm}}
@@ -404,4 +404,12 @@
     <button type="submit" class="btn btn-primary insert">Insert</button>
   </div>
   {{/autoForm}}
+</template>
+
+<template name="myField">
+  <div class="form-group{{#if afFieldIsInvalid name autoform=autoform}} has-error{{/if}}">
+    {{{labelHtml}}}
+    {{{inputHtml}}}
+    <span class="help-block">{{{afFieldMessage name autoform=autoform}}}</span>
+  </div>
 </template>
