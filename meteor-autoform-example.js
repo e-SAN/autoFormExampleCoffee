@@ -102,7 +102,10 @@ Documents = new Meteor.Collection2("documents", {
     },
     optionalDate: {
       type: Date,
-      optional: true
+      optional: true,
+      autoValue: function () {
+        console.log(this.userId);
+      }
     },
     minDate: {
       type: Date,
