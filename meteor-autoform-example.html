@@ -12,6 +12,7 @@
     <h1>Meteor Autoform Example</h1>
     <div class="row" style="margin-bottom: 50px;">
       <div class="col-12 col-lg-8">
+        {{#isolate}}
         {{#autoForm schema=schema doc=selectedDoc id="docForm" novalidate="novalidate"}}
         <div class="formWrap">
           <div class="form-group {{#if afFieldIsInvalid 'requiredString'}}has-error{{/if}}">
@@ -241,6 +242,7 @@
         </div>
         {{> buttons}}
         {{/autoForm}}
+        {{/isolate}}
         <h2>Virtual Field Test</h2>
         {{> virtualFields}}
         <h2>Contact Form Test</h2>
