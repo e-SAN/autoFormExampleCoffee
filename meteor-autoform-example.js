@@ -260,7 +260,7 @@ Dates.allow({
 
 if (Meteor.isClient) {
   SimpleSchema.debug = true;
-  
+
   Meteor.subscribe("docs");
   Meteor.subscribe("persons");
   Meteor.subscribe("dates");
@@ -292,14 +292,14 @@ if (Meteor.isClient) {
 
   Meteor.startup(function() {
     function hookCallback(name, returnArg) {
-      return function () {
+      return function() {
         console.log(name, "hook:", arguments);
         if (typeof returnArg !== "undefined") {
           return arguments[returnArg];
         }
       };
     }
-    
+
     DocumentsForm.hooks({
       before: {
         insert: hookCallback("DocumentsForm before.insert", 0),
@@ -439,6 +439,8 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
+  ConsoleMe.enabled = true;
+
   Meteor.publish("docs", function() {
     return Documents.find();
   });
@@ -459,6 +461,21 @@ if (Meteor.isServer) {
       console.log("Sent E-mail:\n\n" + text);
       sleep(4000);
       return true;
+    },
+    printProcess: function() {
+      var cache = [];
+      console.log(JSON.stringify(process, function(key, value) {
+        if (typeof value === 'object' && value !== null) {
+          if (cache.indexOf(value) !== -1) {
+            // Circular reference found, discard key
+            return;
+          }
+          // Store value in our collection
+          cache.push(value);
+        }
+        return value;
+      }));
+      cache = null; // Enable garbage collection
     }
   });
 

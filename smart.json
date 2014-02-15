@@ -3,6 +3,10 @@
         "bootstrap-3": {},
         "simple-schema": {},
         "collection2": {},
-        "autoform": {}
+        "autoform": {},
+        "console-me": {
+          "git": "https://github.com/aldeed/meteor-console-me.git",
+          "branch": "master"
+        }
     }
 }
