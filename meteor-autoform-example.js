@@ -258,6 +258,26 @@ Dates.allow({
   fetch: []
 });
 
+Person = new SimpleSchema({
+    firstName: {
+        type: String
+    },
+    lastName: {
+        type: String
+    }
+});
+
+People = new SimpleSchema({
+    bestFriend: {
+        type: Person,
+        defaultValue: {firstName: "George", lastName: "Washington"}
+    },
+    worstFriend: {
+        type: Person,
+        optional: true
+    }
+});
+
 if (Meteor.isClient) {
   SimpleSchema.debug = true;
 
@@ -269,6 +289,7 @@ if (Meteor.isClient) {
   DocumentsForm = new AutoForm(Documents);
   DatesForm = new AutoForm(Dates);
   PersonsForm = new AutoForm(Persons);
+  PeopleForm = new AutoForm(People);
 
   var cb = {
     insert: function(error, result) {
@@ -316,6 +337,14 @@ if (Meteor.isClient) {
       onError: hookCallback("DocumentsForm onError"),
       formToDoc: hookCallback("DocumentsForm formToDoc", 0),
       docToForm: hookCallback("DocumentsForm docToForm", 0)
+    });
+    
+    PeopleForm.hooks({
+      onSubmit: function (doc) {
+        People.clean(doc);
+        console.log("People onSubmit", doc);
+        return false;
+      }
     });
 
     DatesForm.hooks({
@@ -439,7 +468,7 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
-  //ConsoleMe.enabled = true;
+  ConsoleMe.enabled = true;
 
   Meteor.publish("docs", function() {
     return Documents.find();
@@ -461,6 +490,9 @@ if (Meteor.isServer) {
       console.log("Sent E-mail:\n\n" + text);
       sleep(4000);
       return true;
+    },
+    log: function(prop) {
+      console.log(global[prop]);
     }
   });
 

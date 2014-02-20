@@ -251,10 +251,12 @@
         {{> normalSubmitForm}}
         <h2>Quick Form Test</h2>
         <div class="formWrap">
-          {{quickForm schema=schema validation="keyup" type="insert" id="myQuickForm" template="myField" buttonContent="Insert" buttonClasses="btn btn-primary" novalidate="novalidate" fields="a.b.c,optionalUrl"}}
+          {{quickForm schema=schema validation="keyup" type="insert" id="myQuickForm" template="myField" buttonContent="Insert" buttonClasses="btn btn-primary" novalidate="novalidate"}}
         </div>
         <h2>Dates Test</h2>
         {{> datesForm}}
+        <h2>People Subschema Test</h2>
+        {{> peopleForm}}
       </div>
       <div class="col-12 col-lg-4">
         {{> docTable}}
@@ -407,6 +409,10 @@
     <button type="submit" class="btn btn-primary insert">Insert</button>
   </div>
   {{/autoForm}}
+</template>
+
+<template name="peopleForm">
+  {{quickForm schema="PeopleForm" id="peopleForm" buttonClasses="btn btn-primary" novalidate="novalidate"}}
 </template>
 
 <template name="myField">
