@@ -116,20 +116,20 @@ Documents = new Meteor.Collection2("documents", {
     },
     requiredEmail: {
       type: String,
-      regEx: SchemaRegEx.Email
+      regEx: SimpleSchema.RegEx.Email
     },
     optionalEmail: {
       type: String,
-      regEx: SchemaRegEx.Email,
+      regEx: SimpleSchema.RegEx.Email,
       optional: true
     },
     requiredUrl: {
       type: String,
-      regEx: SchemaRegEx.Url
+      regEx: SimpleSchema.RegEx.Url
     },
     optionalUrl: {
       type: String,
-      regEx: SchemaRegEx.Url,
+      regEx: SimpleSchema.RegEx.Url,
       optional: true
     },
     'a.b.c': {
@@ -219,7 +219,7 @@ ContactFormSchema = new SimpleSchema({
   },
   email: {
     type: String,
-    regEx: SchemaRegEx.Email,
+    regEx: SimpleSchema.RegEx.Email,
     label: "E-mail address"
   },
   message: {
@@ -430,6 +430,10 @@ if (Meteor.isClient) {
       {label: "Two", value: 2},
       {label: "Three", value: 3}
     ];
+  });
+  
+  Handlebars.registerHelper("log", function(what) {
+    console.log(what);
   });
 }
 
