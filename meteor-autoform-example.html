@@ -11,230 +11,237 @@
     <h1>Meteor Autoform Example</h1>
     <div class="row" style="margin-bottom: 50px;">
       <div class="col-12 col-lg-8">
-        {{#autoForm form=schema doc=selectedDoc id="docForm" type=docFormType}}
+        {{#autoForm collection=docsCollection doc=selectedDoc id="docForm" type=docFormType}}
         <div class="formWrap">
           <div class="form-group {{#if afFieldIsInvalid name='requiredString'}}has-error{{/if}}">
-            {{> afFieldLabel name='requiredString' autoform=this}}
-            {{> afFieldInput name='requiredString' autoform=this autofocus='autofocus' placeholder="schemaLabel"}}
+            {{> afFieldLabel name='requiredString'}}
+            {{> afFieldInput name='requiredString' autofocus='autofocus' placeholder="schemaLabel"}}
             {{#if afFieldIsInvalid name='requiredString'}}
-            <span class="help-block">{{afFieldMessage name='requiredString'}}</span>
+            <span class="help-block">{{{afFieldMessage name='requiredString'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='optionalString' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='optionalString' autoform=this}}
-            {{> afFieldInput name='optionalString' autoform=this}}
-            {{#if afFieldIsInvalid name='optionalString' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='optionalString' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='optionalString'}}has-error{{/if}}">
+            {{> afFieldLabel name='optionalString'}}
+            {{> afFieldInput name='optionalString'}}
+            {{#if afFieldIsInvalid name='optionalString'}}
+            <span class="help-block">{{{afFieldMessage name='optionalString'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='labelString' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='labelString' autoform=this}}
-            {{> afFieldInput name='labelString' placeholder="schemaLabel" autoform=this}}
-            {{#if afFieldIsInvalid name='labelString' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='labelString' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='labelString'}}has-error{{/if}}">
+            {{> afFieldLabel name='labelString'}}
+            {{> afFieldInput name='labelString' placeholder="schemaLabel"}}
+            {{#if afFieldIsInvalid name='labelString'}}
+            <span class="help-block">{{{afFieldMessage name='labelString'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='longString' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='longString' autoform=this}}
-            {{> afFieldInput name='longString' rows="5" autoform=this}}
-            {{#if afFieldIsInvalid name='longString' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='longString' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='longString'}}has-error{{/if}}">
+            {{> afFieldLabel name='longString'}}
+            {{> afFieldInput name='longString' rows="5"}}
+            {{#if afFieldIsInvalid name='longString'}}
+            <span class="help-block">{{{afFieldMessage name='longString'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='maxString' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='maxString' autoform=this}}
+          <div class="form-group {{#if afFieldIsInvalid name='maxString'}}has-error{{/if}}">
+            {{> afFieldLabel name='maxString'}}
             <span class="help-block">Allows a max of 10 characters, but optional</span>
-            {{> afFieldInput name='maxString' autoform=this}}
-            {{#if afFieldIsInvalid name='maxString' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='maxString' autoform=this}}</span>
+            {{> afFieldInput name='maxString'}}
+            {{#if afFieldIsInvalid name='maxString'}}
+            <span class="help-block">{{{afFieldMessage name='maxString'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='minString' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='minString' autoform=this}}
+          <div class="form-group {{#if afFieldIsInvalid name='minString'}}has-error{{/if}}">
+            {{> afFieldLabel name='minString'}}
             <span class="help-block">Allows a min of 10 characters, but optional</span>
-            {{> afFieldInput name='minString' autoform=this}}
-            {{#if afFieldIsInvalid name='minString' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='minString' autoform=this}}</span>
+            {{> afFieldInput name='minString'}}
+            {{#if afFieldIsInvalid name='minString'}}
+            <span class="help-block">{{{afFieldMessage name='minString'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='requiredBoolean' autoform=this}}has-error{{/if}}">
-            {{> afFieldInput name='requiredBoolean' autoform=this}}
-            {{#if afFieldIsInvalid name='requiredBoolean' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='requiredBoolean' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='requiredBoolean'}}has-error{{/if}}">
+            {{> afFieldInput name='requiredBoolean'}}
+            {{#if afFieldIsInvalid name='requiredBoolean'}}
+            <span class="help-block">{{{afFieldMessage name='requiredBoolean'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='optionalBoolean' autoform=this}}has-error{{/if}}">
-            {{> afFieldInput name='optionalBoolean' autoform=this}}
-            {{#if afFieldIsInvalid name='optionalBoolean' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='optionalBoolean' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='optionalBoolean'}}has-error{{/if}}">
+            {{> afFieldInput name='optionalBoolean'}}
+            {{#if afFieldIsInvalid name='optionalBoolean'}}
+            <span class="help-block">{{{afFieldMessage name='optionalBoolean'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='radioBoolean' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='radioBoolean' autoform=this}}
-            {{> afFieldInput name='radioBoolean' radio="true" trueLabel="Yes" falseLabel="No" autoform=this}}
-            {{#if afFieldIsInvalid name='radioBoolean' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='radioBoolean' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='radioBoolean'}}has-error{{/if}}">
+            {{> afFieldLabel name='radioBoolean'}}
+            {{> afFieldInput name='radioBoolean' radio="true" trueLabel="Yes" falseLabel="No"}}
+            {{#if afFieldIsInvalid name='radioBoolean'}}
+            <span class="help-block">{{{afFieldMessage name='radioBoolean'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='selectBoolean' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='selectBoolean' autoform=this}}
-            {{> afFieldInput name='selectBoolean' select="true" trueLabel="Yes" falseLabel="No" value="true" autoform=this}}
-            {{#if afFieldIsInvalid name='selectBoolean' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='selectBoolean' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='selectBoolean'}}has-error{{/if}}">
+            {{> afFieldLabel name='selectBoolean'}}
+            {{> afFieldInput name='selectBoolean' select="true" trueLabel="Yes" falseLabel="No" value="true"}}
+            {{#if afFieldIsInvalid name='selectBoolean'}}
+            <span class="help-block">{{{afFieldMessage name='selectBoolean'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='requiredSelect' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='requiredSelect' autoform=this}}
-            {{> afFieldInput name='requiredSelect' options=numSelectOptions autoform=this}}
-            {{#if afFieldIsInvalid name='requiredSelect' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='requiredSelect' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='requiredSelect'}}has-error{{/if}}">
+            {{> afFieldLabel name='requiredSelect'}}
+            {{> afFieldInput name='requiredSelect' options=numSelectOptions}}
+            {{#if afFieldIsInvalid name='requiredSelect'}}
+            <span class="help-block">{{{afFieldMessage name='requiredSelect'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='optionalSelect' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='optionalSelect' autoform=this}}
-            {{> afFieldInput name='optionalSelect' options="allowed" capitalize="true" autoform=this}}
-            {{#if afFieldIsInvalid name='optionalSelect' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='optionalSelect' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='optionalSelect'}}has-error{{/if}}">
+            {{> afFieldLabel name='optionalSelect'}}
+            {{> afFieldInput name='optionalSelect' options="allowed" capitalize="true"}}
+            {{#if afFieldIsInvalid name='optionalSelect'}}
+            <span class="help-block">{{{afFieldMessage name='optionalSelect'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='firstOptionSelect' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='firstOptionSelect' autoform=this}}
-            {{> afFieldInput name='firstOptionSelect' firstOption="(Select Something)" options=numSelectOptions autoform=this}}
-            {{#if afFieldIsInvalid name='firstOptionSelect' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='firstOptionSelect' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='firstOptionSelect'}}has-error{{/if}}">
+            {{> afFieldLabel name='firstOptionSelect'}}
+            {{> afFieldInput name='firstOptionSelect' firstOption="(Select Something)" options=numSelectOptions}}
+            {{#if afFieldIsInvalid name='firstOptionSelect'}}
+            <span class="help-block">{{{afFieldMessage name='firstOptionSelect'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='firstOptionRequiredSelect' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='firstOptionRequiredSelect' autoform=this}}
-            {{> afFieldInput name='firstOptionRequiredSelect' firstOption="(Select Something)" options=numSelectOptions autoform=this}}
-            {{#if afFieldIsInvalid name='firstOptionRequiredSelect' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='firstOptionRequiredSelect' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='firstOptionRequiredSelect'}}has-error{{/if}}">
+            {{> afFieldLabel name='firstOptionRequiredSelect'}}
+            {{> afFieldInput name='firstOptionRequiredSelect' firstOption="(Select Something)" options=numSelectOptions}}
+            {{#if afFieldIsInvalid name='firstOptionRequiredSelect'}}
+            <span class="help-block">{{{afFieldMessage name='firstOptionRequiredSelect'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='maxSelect' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='maxSelect' autoform=this}}
+          <div class="form-group {{#if afFieldIsInvalid name='maxSelect'}}has-error{{/if}}">
+            {{> afFieldLabel name='maxSelect'}}
             <span class="help-block">Select no more than two options</span>
-            {{> afFieldInput name='maxSelect' options=numSelectOptions autoform=this}}
-            {{#if afFieldIsInvalid name='maxSelect' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='maxSelect' autoform=this}}</span>
+            {{> afFieldInput name='maxSelect' options=numSelectOptions}}
+            {{#if afFieldIsInvalid name='maxSelect'}}
+            <span class="help-block">{{{afFieldMessage name='maxSelect'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='minSelect' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='minSelect' autoform=this}}
+          <div class="form-group {{#if afFieldIsInvalid name='minSelect'}}has-error{{/if}}">
+            {{> afFieldLabel name='minSelect'}}
             <span class="help-block">Select at least two options</span>
-            {{> afFieldInput name='minSelect' options=numSelectOptions autoform=this}}
-            {{#if afFieldIsInvalid name='minSelect' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='minSelect' autoform=this}}</span>
+            {{> afFieldInput name='minSelect' options=numSelectOptions}}
+            {{#if afFieldIsInvalid name='minSelect'}}
+            <span class="help-block">{{{afFieldMessage name='minSelect'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='requiredNumber' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='requiredNumber' autoform=this}}
-            {{> afFieldInput name='requiredNumber' autoform=this}}
-            {{#if afFieldIsInvalid name='requiredNumber' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='requiredNumber' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='optionalStringArray'}}has-error{{/if}}">
+            {{> afFieldLabel name='optionalStringArray'}}
+            {{> afFieldInput name='optionalStringArray'}}
+            {{#if afFieldIsInvalid name='optionalStringArray'}}
+            <span class="help-block">{{{afFieldMessage name='optionalStringArray'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='optionalNumber' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='optionalNumber' autoform=this}}
-            {{> afFieldInput name='optionalNumber' autoform=this}}
-            {{#if afFieldIsInvalid name='optionalNumber' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='optionalNumber' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='requiredNumber'}}has-error{{/if}}">
+            {{> afFieldLabel name='requiredNumber'}}
+            {{> afFieldInput name='requiredNumber'}}
+            {{#if afFieldIsInvalid name='requiredNumber'}}
+            <span class="help-block">{{{afFieldMessage name='requiredNumber'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='maxNumber' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='maxNumber' autoform=this}}
+          <div class="form-group {{#if afFieldIsInvalid name='optionalNumber'}}has-error{{/if}}">
+            {{> afFieldLabel name='optionalNumber'}}
+            {{> afFieldInput name='optionalNumber'}}
+            {{#if afFieldIsInvalid name='optionalNumber'}}
+            <span class="help-block">{{{afFieldMessage name='optionalNumber'}}}</span>
+            {{/if}}
+          </div>
+          <div class="form-group {{#if afFieldIsInvalid name='maxNumber'}}has-error{{/if}}">
+            {{> afFieldLabel name='maxNumber'}}
             <span class="help-block">Enter a number less than 10</span>
-            {{> afFieldInput name='maxNumber' autoform=this}}
-            {{#if afFieldIsInvalid name='maxNumber' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='maxNumber' autoform=this}}</span>
+            {{> afFieldInput name='maxNumber'}}
+            {{#if afFieldIsInvalid name='maxNumber'}}
+            <span class="help-block">{{{afFieldMessage name='maxNumber'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='minNumber' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='minNumber' autoform=this}}
+          <div class="form-group {{#if afFieldIsInvalid name='minNumber'}}has-error{{/if}}">
+            {{> afFieldLabel name='minNumber'}}
             <span class="help-block">Enter a number more than 10</span>
-            {{> afFieldInput name='minNumber' autoform=this}}
-            {{#if afFieldIsInvalid name='minNumber' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='minNumber' autoform=this}}</span>
+            {{> afFieldInput name='minNumber'}}
+            {{#if afFieldIsInvalid name='minNumber'}}
+            <span class="help-block">{{{afFieldMessage name='minNumber'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='decimal' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='decimal' autoform=this}}
+          <div class="form-group {{#if afFieldIsInvalid name='decimal'}}has-error{{/if}}">
+            {{> afFieldLabel name='decimal'}}
             <span class="help-block">Decimal number is OK</span>
-            {{> afFieldInput name='decimal' step="0.01" autoform=this}}
-            {{#if afFieldIsInvalid name='decimal' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='decimal' autoform=this}}</span>
+            {{> afFieldInput name='decimal' step="0.01"}}
+            {{#if afFieldIsInvalid name='decimal'}}
+            <span class="help-block">{{{afFieldMessage name='decimal'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='requiredDate' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='requiredDate' autoform=this}}
-            {{> afFieldInput name='requiredDate' autoform=this}}
-            {{#if afFieldIsInvalid name='requiredDate' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='requiredDate' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='requiredDate'}}has-error{{/if}}">
+            {{> afFieldLabel name='requiredDate'}}
+            {{> afFieldInput name='requiredDate'}}
+            {{#if afFieldIsInvalid name='requiredDate'}}
+            <span class="help-block">{{{afFieldMessage name='requiredDate'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='optionalDate' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='optionalDate' autoform=this}}
-            {{> afFieldInput name='optionalDate' autoform=this}}
-            {{#if afFieldIsInvalid name='optionalDate' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='optionalDate' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='optionalDate'}}has-error{{/if}}">
+            {{> afFieldLabel name='optionalDate'}}
+            {{> afFieldInput name='optionalDate'}}
+            {{#if afFieldIsInvalid name='optionalDate'}}
+            <span class="help-block">{{{afFieldMessage name='optionalDate'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='minDate' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='minDate' autoform=this}}
+          <div class="form-group {{#if afFieldIsInvalid name='minDate'}}has-error{{/if}}">
+            {{> afFieldLabel name='minDate'}}
             <span class="help-block">Enter a date on or after 1 January 2013</span>
-            {{> afFieldInput name='minDate' autoform=this}}
-            {{#if afFieldIsInvalid name='minDate' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='minDate' autoform=this}}</span>
+            {{> afFieldInput name='minDate'}}
+            {{#if afFieldIsInvalid name='minDate'}}
+            <span class="help-block">{{{afFieldMessage name='minDate'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='maxDate' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='maxDate' autoform=this}}
+          <div class="form-group {{#if afFieldIsInvalid name='maxDate'}}has-error{{/if}}">
+            {{> afFieldLabel name='maxDate'}}
             <span class="help-block">Enter a date on or before 31 December 2012</span>
-            {{> afFieldInput name='maxDate' autoform=this}}
-            {{#if afFieldIsInvalid name='maxDate' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='maxDate' autoform=this}}</span>
+            {{> afFieldInput name='maxDate'}}
+            {{#if afFieldIsInvalid name='maxDate'}}
+            <span class="help-block">{{{afFieldMessage name='maxDate'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='requiredEmail' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='requiredEmail' autoform=this}}
-            {{> afFieldInput name='requiredEmail' autoform=this}}
-            {{#if afFieldIsInvalid name='requiredEmail' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='requiredEmail' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='requiredEmail'}}has-error{{/if}}">
+            {{> afFieldLabel name='requiredEmail'}}
+            {{> afFieldInput name='requiredEmail'}}
+            {{#if afFieldIsInvalid name='requiredEmail'}}
+            <span class="help-block">{{{afFieldMessage name='requiredEmail'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='optionalEmail' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='optionalEmail' autoform=this}}
-            {{> afFieldInput name='optionalEmail' autoform=this}}
-            {{#if afFieldIsInvalid name='optionalEmail' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='optionalEmail' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='optionalEmail'}}has-error{{/if}}">
+            {{> afFieldLabel name='optionalEmail'}}
+            {{> afFieldInput name='optionalEmail'}}
+            {{#if afFieldIsInvalid name='optionalEmail'}}
+            <span class="help-block">{{{afFieldMessage name='optionalEmail'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='requiredUrl' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='requiredUrl' autoform=this}}
-            {{> afFieldInput name='requiredUrl' autoform=this}}
-            {{#if afFieldIsInvalid name='requiredUrl' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='requiredUrl' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='requiredUrl'}}has-error{{/if}}">
+            {{> afFieldLabel name='requiredUrl'}}
+            {{> afFieldInput name='requiredUrl'}}
+            {{#if afFieldIsInvalid name='requiredUrl'}}
+            <span class="help-block">{{{afFieldMessage name='requiredUrl'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='optionalUrl' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='optionalUrl' autoform=this}}
-            {{> afFieldInput name='optionalUrl' autoform=this}}
-            {{#if afFieldIsInvalid name='optionalUrl' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='optionalUrl' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='optionalUrl'}}has-error{{/if}}">
+            {{> afFieldLabel name='optionalUrl'}}
+            {{> afFieldInput name='optionalUrl'}}
+            {{#if afFieldIsInvalid name='optionalUrl'}}
+            <span class="help-block">{{{afFieldMessage name='optionalUrl'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='a.b.c' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='a.b.c' autoform=this}}
-            {{> afFieldInput name='a.b.c' autoform=this}}
-            {{#if afFieldIsInvalid name='a.b.c' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='a.b.c' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='a.b.c'}}has-error{{/if}}">
+            {{> afFieldLabel name='a.b.c'}}
+            {{> afFieldInput name='a.b.c'}}
+            {{#if afFieldIsInvalid name='a.b.c'}}
+            <span class="help-block">{{{afFieldMessage name='a.b.c'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='arrayOfObjects.0.name' autoform=this}}has-error{{/if}}">
-            {{> afFieldLabel name='arrayOfObjects.0.name' autoform=this}}
-            {{> afFieldInput name='arrayOfObjects.0.name' autoform=this}}
-            {{#if afFieldIsInvalid name='arrayOfObjects.0.name' autoform=this}}
-            <span class="help-block">{{afFieldMessage name='arrayOfObjects.0.name' autoform=this}}</span>
+          <div class="form-group {{#if afFieldIsInvalid name='arrayOfObjects.0.name'}}has-error{{/if}}">
+            {{> afFieldLabel name='arrayOfObjects.0.name'}}
+            {{> afFieldInput name='arrayOfObjects.0.name'}}
+            {{#if afFieldIsInvalid name='arrayOfObjects.0.name'}}
+            <span class="help-block">{{{afFieldMessage name='arrayOfObjects.0.name'}}}</span>
             {{/if}}
           </div>
         </div>
@@ -249,7 +256,7 @@
         {{> normalSubmitForm}}
         <h2>Quick Form Test</h2>
         <div class="formWrap">
-          {{> quickForm form=schema validation="keyup" type="disabled" id="myQuickForm" buttonClasses="btn btn-primary" novalidate="novalidate"}}
+          {{> quickForm collection=docsCollection validation="keyup" type="disabled" id="myQuickForm" buttonClasses="btn btn-primary"}}
         </div>
         <h2>Dates Test</h2>
         {{> datesForm}}
@@ -272,7 +279,7 @@
       <tr>
         <td><button type="button" class="btn-link docSelect">{{requiredString}}</button></td>
         <td>
-          {{#autoForm form='Documents' doc=this type="remove"}}
+          {{#autoForm collection='Documents' doc=this type="remove"}}
           <button type="submit" class="btn btn-primary">Delete</button>
           {{/autoForm}}
         </td>
@@ -283,21 +290,21 @@
 </template>
 
 <template name="virtualFields">
-  {{#autoForm form='PersonsForm' validation="keyup" id="personsForm" type="insert"}}
+  {{#autoForm collection='Persons' validation="keyup" id="personsForm" type="insert"}}
   <fieldset>
     <legend>Add a Person</legend>
-    <div class="form-group {{#if afFieldIsInvalid name='firstName' autoform=this}}has-error{{/if}}">
-      {{> afFieldLabel name='firstName' autoform=this}}
-      {{> afFieldInput name='firstName' autoform=this}}
-      {{#if afFieldIsInvalid name='firstName' autoform=this}}
-      <span class="help-block">{{afFieldMessage name='firstName' autoform=this}}</span>
+    <div class="form-group {{#if afFieldIsInvalid name='firstName'}}has-error{{/if}}">
+      {{> afFieldLabel name='firstName'}}
+      {{> afFieldInput name='firstName'}}
+      {{#if afFieldIsInvalid name='firstName'}}
+      <span class="help-block">{{{afFieldMessage name='firstName'}}}</span>
       {{/if}}
     </div>
-    <div class="form-group {{#if afFieldIsInvalid name='lastName' autoform=this}}has-error{{/if}}">
-      {{> afFieldLabel name='lastName' autoform=this}}
-      {{> afFieldInput name='lastName' autoform=this}}
-      {{#if afFieldIsInvalid name='lastName' autoform=this}}
-      <span class="help-block">{{afFieldMessage name='lastName' autoform=this}}</span>
+    <div class="form-group {{#if afFieldIsInvalid name='lastName'}}has-error{{/if}}">
+      {{> afFieldLabel name='lastName'}}
+      {{> afFieldInput name='lastName'}}
+      {{#if afFieldIsInvalid name='lastName'}}
+      <span class="help-block">{{{afFieldMessage name='lastName'}}}</span>
       {{/if}}
     </div>
   </fieldset>
@@ -319,9 +326,7 @@
         <td>{{lastName}}</td>
         <td>{{fullName}}</td>
         <td>
-          {{#autoForm form='PersonsForm' type="remove" doc=this}}
-          <button type="submit" class="btn btn-primary">Delete</button>
-          {{/autoForm}}
+          {{> afDeleteButton collection='Persons' doc=this}}
         </td>
       </tr>
       {{/each}}
@@ -330,28 +335,28 @@
 </template>
 
 <template name="contactForm">
-  {{#autoForm form="ContactForm" id="contactForm" type="method" meteormethod="sendEmail"}}
+  {{#autoForm schema="ContactFormSchema" id="contactForm" type="method" meteormethod="sendEmail"}}
   <fieldset>
     <legend>Contact Us</legend>
-    <div class="form-group {{#if afFieldIsInvalid name='name' autoform=this}}has-error{{/if}}">
-      {{> afFieldLabel name="name" autoform=this}}
-      {{> afFieldInput name="name" autoform=this}}
-      {{#if afFieldIsInvalid name="name" autoform=this}}
-      <span class="help-block">{{afFieldMessage name="name" autoform=this}}</span>
+    <div class="form-group {{#if afFieldIsInvalid name='name'}}has-error{{/if}}">
+      {{> afFieldLabel name="name"}}
+      {{> afFieldInput name="name"}}
+      {{#if afFieldIsInvalid name="name"}}
+      <span class="help-block">{{{afFieldMessage name="name"}}}</span>
       {{/if}}
     </div>
-    <div class="form-group {{#if afFieldIsInvalid name='email' autoform=this}}has-error{{/if}}">
-      {{> afFieldLabel name="email" autoform=this}}
-      {{> afFieldInput name="email" autoform=this}}
-      {{#if afFieldIsInvalid name="email" autoform=this}}
-      <span class="help-block">{{afFieldMessage name="email" autoform=this}}</span>
+    <div class="form-group {{#if afFieldIsInvalid name='email'}}has-error{{/if}}">
+      {{> afFieldLabel name="email"}}
+      {{> afFieldInput name="email"}}
+      {{#if afFieldIsInvalid name="email"}}
+      <span class="help-block">{{{afFieldMessage name="email"}}}</span>
       {{/if}}
     </div>
-    <div class="form-group {{#if afFieldIsInvalid name='message' autoform=this}}has-error{{/if}}">
-      {{> afFieldLabel name="message" autoform=this}}
-      {{> afFieldInput name="message" rows="10" autoform=this}}
-      {{#if afFieldIsInvalid name="message" autoform=this}}
-      <span class="help-block">{{afFieldMessage name="message" autoform=this}}</span>
+    <div class="form-group {{#if afFieldIsInvalid name='message'}}has-error{{/if}}">
+      {{> afFieldLabel name="message"}}
+      {{> afFieldInput name="message" rows="10"}}
+      {{#if afFieldIsInvalid name="message"}}
+      <span class="help-block">{{{afFieldMessage name="message"}}}</span>
       {{/if}}
     </div>
     <div>
@@ -363,12 +368,12 @@
 </template>
 
 <template name="normalSubmitForm">
-  {{#autoForm form="ContactForm" id="contactForm2" action="/fake" method="post"}}
+  {{#autoForm schema="ContactFormSchema" id="contactForm2" action="/fake" method="post"}}
   <fieldset>
     <legend>Contact Us</legend>
-    {{> afQuickField name="name" label=false placeholder="schemaLabel" autoform=this}}
-    {{> afQuickField name="email" label=false placeholder="schemaLabel" autoform=this}}
-    {{> afQuickField name="message" label=false placeholder="schemaLabel" rows="10" autoform=this}}
+    {{> afQuickField name="name" label=false placeholder="schemaLabel"}}
+    {{> afQuickField name="email" label=false placeholder="schemaLabel"}}
+    {{> afQuickField name="message" label=false placeholder="schemaLabel" rows="10"}}
     <div>
       <button type="submit" class="btn btn-primary">Submit</button>
       <button type="reset" class="btn btn-default">Reset</button>
@@ -378,20 +383,20 @@
 </template>
 
 <template name="datesForm">
-  {{#autoForm form="DatesForm" type="insert" doc=dateDoc id="datesForm1"}}
-  {{> afQuickField name="date" value=today autoform=this}}
+  {{#autoForm collection="Dates" type="insert" doc=dateDoc id="datesForm1"}}
+  {{> afQuickField name="date" value=today}}
   <div>
     <button type="submit" class="btn btn-primary">Insert</button>
   </div>
   {{/autoForm}}
-  {{#autoForm form="DatesForm" type="insert" doc=dateTimeDoc id="datesForm2"}}
-  {{> afQuickField name="dateTime" type="datetime" autoform=this}}
+  {{#autoForm collection="Dates" type="insert" doc=dateTimeDoc id="datesForm2"}}
+  {{> afQuickField name="dateTime" type="datetime"}}
   <div>
     <button type="submit" class="btn btn-primary">Insert</button>
   </div>
   {{/autoForm}}
-  {{#autoForm form="DatesForm" type="insert" doc=dateTimeLocalDoc id="datesForm3"}}
-  {{> afQuickField name="dateTimeLocal" type="datetime-local" offset="-0100" autoform=this}}
+  {{#autoForm collection="Dates" type="insert" doc=dateTimeLocalDoc id="datesForm3"}}
+  {{> afQuickField name="dateTimeLocal" type="datetime-local" offset="-0100"}}
   <div>
     <button type="submit" class="btn btn-primary">Insert</button>
   </div>

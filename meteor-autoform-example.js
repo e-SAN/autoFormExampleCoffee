@@ -1,5 +1,5 @@
 //Schema
-Documents = new Meteor.Collection2("documents", {
+Documents = new Meteor.Collection("documents", {
   schema: {
     requiredString: {
       type: String
@@ -27,6 +27,11 @@ Documents = new Meteor.Collection2("documents", {
       type: String,
       optional: true,
       min: 10
+    },
+    optionalStringArray: {
+      type: [String],
+      optional: true,
+      minCount: 2
     },
     requiredBoolean: {
       type: Boolean
@@ -169,7 +174,7 @@ Documents.simpleSchema().messages({
   'regEx optionalUrl': "[label] is not a valid URL"
 });
 
-Persons = new Meteor.Collection2("persons", {
+Persons = new Meteor.Collection("persons", {
   schema: {
     _id: {
       type: String,
@@ -232,7 +237,7 @@ ContactFormSchema.messages({
   'regEx email': "[label] is not a valid e-mail address"
 });
 
-Dates = new Meteor.Collection2("dates", {
+Dates = new Meteor.Collection("dates", {
   schema: {
     date: {
       type: Date,
@@ -263,64 +268,83 @@ Dates.allow({
 });
 
 if (Meteor.isClient) {
+  SimpleSchema.debug = true;
+
   Meteor.subscribe("docs");
   Meteor.subscribe("persons");
   Meteor.subscribe("dates");
 
-  ContactForm = new AutoForm(ContactFormSchema);
-  DocumentsForm = new AutoForm(Documents);
-  DatesForm = new AutoForm(Dates);
-  PersonsForm = new AutoForm(Persons);
-
   var cb = {
-    insert: function(error, result) {
-      if (error) {
-        console.log("Insert Error:", error);
-      } else {
-        console.log("Insert Result:", result);
+    after: {
+      insert: function(error, result) {
+        if (error) {
+          console.log("Insert Error:", error);
+        } else {
+          console.log("Insert Result:", result);
+        }
+      },
+      update: function(error) {
+        if (error) {
+          console.log("Update Error:", error);
+        } else {
+          console.log("Updated!");
+        }
+      },
+      remove: function(error) {
+        console.log("Remove Error:", error);
       }
-    },
-    update: function(error) {
-      if (error) {
-        console.log("Update Error:", error);
-      } else {
-        console.log("Updated!");
-      }
-    },
-    remove: function(error) {
-      console.log("Remove Error:", error);
     }
   };
 
-  Meteor.startup(function() {
-    DocumentsForm.hooks({
-      after: cb,
+  var contactCB = {
+    after: {
+      sendEmail: function() {
+        console.log("after sendEmail hook");
+      }
+    },
+    onSubmit: function() {
+      console.log("onSubmit hook");
+      //this.resetForm();
+      //return false;
+    }
+  };
+
+  AutoForm.hooks({
+    datesForm1: cb,
+    datesForm2: cb,
+    datesForm3: cb,
+    docForm: _.extend({
       before: {
-        insert: function (doc) {
+        insert: function(doc) {
           console.log("before.insert received document", doc);
           return doc;
         }
+      },
+      docToForm: function(doc) {
+        console.log(doc.optionalStringArray);
+        if (_.isArray(doc.optionalStringArray)) {
+          doc.optionalStringArray = doc.optionalStringArray.join(", ");
+        }
+        return doc;
+      },
+      formToDoc: function(doc) {
+        if (typeof doc.optionalStringArray === "string") {
+          doc.optionalStringArray = doc.optionalStringArray.split(",");
+        }
+        console.log(doc.optionalStringArray);
+        return doc;
       }
-    });
-
-    DatesForm.hooks({
-      after: {
-        insert: function(error, result) {
-          if (error) {
-            console.log("Insert Error:", error, Dates.simpleSchema().namedContext().invalidKeys());
-          } else {
-            console.log("Inserted:", Dates.findOne(result));
-          }
+    }, cb),
+    contactForm: contactCB,
+    contactForm2: contactCB,
+    personsForm: {
+      before: {
+        remove: function(id) {
+          var name = Persons.findOne(id).fullName;
+          return confirm("Remove " + name + "?");
         }
       }
-    });
-
-    Deps.autorun(function() {
-      var ctx = Documents.simpleSchema().namedContext("docForm");
-      if (!ctx.isValid()) {
-        console.log("Invalid keys in Document:", ctx.invalidKeys());
-      }
-    });
+    }
   });
 
   Documents.simpleSchema().validator(function(key, val, def) {
@@ -329,37 +353,15 @@ if (Meteor.isClient) {
     }
     return true;
   });
-  
-  PersonsForm.hooks({
-    before: {
-      remove: function(id) {
-        var name = Persons.findOne(id).fullName;
-        return confirm("Remove " + name + "?");
-      }
-    }
-  });
 
-  ContactForm.hooks({
-    after: {
-      "sendEmail": function() {
-        console.log("after sendEmail hook");
-      }
-    },
-    onSubmit: function() {
-      console.log("onSubmit hook");
-      this.resetForm();
-      //return false;
-    }
-  });
-
-  Template.example.schema = function() {
-    return DocumentsForm;
+  Template.example.docsCollection = function() {
+    return Documents;
   };
 
   Template.example.selectedDoc = function() {
     return Documents.findOne(Session.get("selectedDoc"));
   };
-  
+
   Template.example.newDocMode = function() {
     return !Session.get("selectedDoc");
   };
@@ -378,19 +380,19 @@ if (Meteor.isClient) {
     return null;
     //return Dates.findOne({_id: "pMcpm4vxkA5Hq4SyM"});
   };
-  
+
   Template.datesForm.today = function() {
     return dateToDateString(new Date);
   };
-  
-  UI.body.testData = function () {
+
+  UI.body.testData = function() {
     if (Session.get("selectedDoc")) {
       return {docFormType: "update"};
     } else {
       return {docFormType: "insert"};
     }
   };
-  
+
   var dateToDateString = function(date) {
     var m = (date.getMonth() + 1);
     if (m < 10) {
@@ -410,12 +412,12 @@ if (Meteor.isClient) {
   Template.example.events({
     'click .docSelect': function(e, t) {
       e.preventDefault();
-      AutoForm.resetForm("docForm", Documents.simpleSchema());
+      AutoForm.resetForm("docForm");
       Session.set("selectedDoc", this._id);
     },
     'click .docClear': function(e, t) {
       e.preventDefault();
-      AutoForm.resetForm("docForm", Documents.simpleSchema());
+      AutoForm.resetForm("docForm");
       Session.set("selectedDoc", null);
     }
   });
@@ -431,7 +433,7 @@ if (Meteor.isClient) {
       {label: "Three", value: 3}
     ];
   });
-  
+
   Handlebars.registerHelper("log", function(what) {
     console.log(what);
   });
@@ -466,7 +468,8 @@ if (Meteor.isServer) {
   });
 }
 
-function sleep(ms){
+function sleep(ms) {
   var done = Date.now() + ms;
-  while(Date.now() < done){ /* do nothing */ } 
+  while (Date.now() < done) { /* do nothing */
+  }
 }
