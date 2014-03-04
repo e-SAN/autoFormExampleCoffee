@@ -34,7 +34,8 @@ Documents = new Meteor.Collection("documents", {
       minCount: 2
     },
     requiredBoolean: {
-      type: Boolean
+      type: Boolean,
+      defaultValue: true
     },
     optionalBoolean: {
       type: Boolean,
@@ -42,15 +43,18 @@ Documents = new Meteor.Collection("documents", {
     },
     radioBoolean: {
       type: Boolean,
-      optional: true
+      optional: true,
+      defaultValue: true
     },
     selectBoolean: {
       type: Boolean,
-      optional: true
+      optional: true,
+      defaultValue: false
     },
     requiredSelect: {
       type: Number,
-      allowedValues: [1, 2, 3]
+      allowedValues: [1, 2, 3],
+      defaultValue: 2
     },
     optionalSelect: {
       type: String,
