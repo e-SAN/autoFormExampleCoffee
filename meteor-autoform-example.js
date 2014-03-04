@@ -346,6 +346,12 @@ if (Meteor.isClient) {
         return false;
       }
     });
+    
+    ContactForm.hooks({
+      onSubmit: function () {
+        return false;
+      }
+    });
 
     DatesForm.hooks({
       after: {

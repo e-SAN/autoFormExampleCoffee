@@ -1,3 +1,9 @@
+/* These disable the built-in picker for date controls that use bootstrap datepicker */
+
+input::-webkit-calendar-picker-indicator{
+    display: none;
+}
+
 .formWrap {
     max-height: 400px;
     overflow: auto;
