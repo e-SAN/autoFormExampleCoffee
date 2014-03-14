@@ -195,11 +195,12 @@ Persons = new Meteor.Collection("persons", {
       max: 30,
       unique: true
     }
-  },
-  virtualFields: {
-    fullName: function(person) {
-      return person.firstName + " " + person.lastName;
-    }
+  }
+});
+
+Persons.helpers({
+  fullName: function () {
+    return this.firstName + ' ' + this.lastName;
   }
 });
 

@@ -326,6 +326,7 @@
         <td>{{lastName}}</td>
         <td>{{fullName}}</td>
         <td>
+          {{#afDeleteButton collection='Persons' doc=this}}<span style="color: yellow">DELETE ME</span>{{/afDeleteButton}}
           {{> afDeleteButton collection='Persons' doc=this}}
         </td>
       </tr>
