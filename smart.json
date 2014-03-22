@@ -3,9 +3,7 @@
     "bootstrap-3": {},
     "simple-schema": {},
     "collection2": {},
-    "autoform": {
-      "path": "/Users/Eric/DevProjects/meteor-autoform"
-    },
+    "autoform": {},
     "collection-helpers": {}
   }
 }

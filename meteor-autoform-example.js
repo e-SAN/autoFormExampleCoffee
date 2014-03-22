@@ -194,6 +194,17 @@ Persons = new Meteor.Collection("persons", {
       label: "Last name",
       max: 30,
       unique: true
+    },
+    createdAt: {
+      type: Date,
+      autoValue: function () {
+        if (this.isInsert) {
+          return new Date;
+        } else {
+          this.unset();
+        }
+      },
+      denyUpdate: true
     }
   }
 });
@@ -221,7 +232,11 @@ Persons.simpleSchema().messages({
   notUnique: "Only one of each last name allowed"
 });
 
-ContactFormSchema = new SimpleSchema({
+var Schemas = {};
+
+Handlebars.registerHelper("Schemas", Schemas);
+
+Schemas.ContactForm = new SimpleSchema({
   name: {
     type: String,
     label: "Your name",
@@ -238,7 +253,7 @@ ContactFormSchema = new SimpleSchema({
     max: 1000
   }
 });
-ContactFormSchema.messages({
+Schemas.ContactForm.messages({
   'regEx email': "[label] is not a valid e-mail address"
 });
 
@@ -275,31 +290,11 @@ Dates.allow({
 if (Meteor.isClient) {
   SimpleSchema.debug = true;
 
+  Session.setDefault("showPersonForm", true);
+
   Meteor.subscribe("docs");
   Meteor.subscribe("persons");
   Meteor.subscribe("dates");
-
-  var cb = {
-    after: {
-      insert: function(error, result) {
-        if (error) {
-          console.log("Insert Error:", error);
-        } else {
-          console.log("Insert Result:", result);
-        }
-      },
-      update: function(error) {
-        if (error) {
-          console.log("Update Error:", error);
-        } else {
-          console.log("Updated!");
-        }
-      },
-      remove: function(error) {
-        console.log("Remove Error:", error);
-      }
-    }
-  };
 
   var contactCB = {
     after: {
@@ -315,10 +310,7 @@ if (Meteor.isClient) {
   };
 
   AutoForm.hooks({
-    datesForm1: cb,
-    datesForm2: cb,
-    datesForm3: cb,
-    docForm: _.extend({
+    docForm: {
       before: {
         insert: function(doc) {
           console.log("before.insert received document", doc);
@@ -339,7 +331,7 @@ if (Meteor.isClient) {
         console.log(doc.optionalStringArray);
         return doc;
       }
-    }, cb),
+    },
     contactForm: contactCB,
     contactForm2: contactCB,
     personsForm: {
@@ -349,6 +341,34 @@ if (Meteor.isClient) {
           return confirm("Remove " + name + "?");
         }
       }
+    }
+  });
+
+  AutoForm.addHooks(['docForm', 'datesForm1', 'datesForm2', 'datesForm3'], {
+    after: {
+      insert: function(error, result) {
+        if (error) {
+          console.log("Insert Error:", error);
+        } else {
+          console.log("Insert Result:", result);
+        }
+      },
+      update: function(error) {
+        if (error) {
+          console.log("Update Error:", error);
+        } else {
+          console.log("Updated!");
+        }
+      },
+      remove: function(error) {
+        console.log("Remove Error:", error);
+      }
+    }
+  });
+
+  AutoForm.addHooks(null, {
+    onSubmit: function () {
+      console.log("onSubmit ALL FORMS!");
     }
   });
 
@@ -370,6 +390,8 @@ if (Meteor.isClient) {
   Template.example.newDocMode = function() {
     return !Session.get("selectedDoc");
   };
+
+  Template.example.tester = {};
 
   Template.datesForm.dateDoc = function() {
     return null;
@@ -431,6 +453,10 @@ if (Meteor.isClient) {
     return Persons.find().fetch();
   };
 
+  Template.virtualFields.showPersonForm = function () {
+    return Session.get("showPersonForm");
+  };
+
   Handlebars.registerHelper("numSelectOptions", function(options) {
     return [
       {label: "One", value: 1},
@@ -457,7 +483,7 @@ if (Meteor.isServer) {
 
   Meteor.methods({
     sendEmail: function(doc) {
-      check(doc, ContactFormSchema);
+      check(doc, Schemas.ContactForm);
       var text = "Name: " + doc.name + "\n\n"
               + "Email: " + doc.email + "\n\n\n\n"
               + doc.message;

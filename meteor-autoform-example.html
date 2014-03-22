@@ -13,13 +13,15 @@
       <div class="col-12 col-lg-8">
         {{#autoForm collection=docsCollection doc=selectedDoc id="docForm" type=docFormType}}
         <div class="formWrap">
-          <div class="form-group {{#if afFieldIsInvalid name='requiredString'}}has-error{{/if}}">
-            {{> afFieldLabel name='requiredString'}}
-            {{> afFieldInput name='requiredString' autofocus='autofocus' placeholder="schemaLabel"}}
-            {{#if afFieldIsInvalid name='requiredString'}}
-            <span class="help-block">{{{afFieldMessage name='requiredString'}}}</span>
+          {{#with tester}}
+          <div class="form-group {{#if afFieldIsInvalid name='requiredString' autoform=..}}has-error{{/if}}">
+            {{> afFieldLabel name='requiredString' template='plain'}}
+            {{> afFieldInput name='requiredString' autofocus='autofocus' placeholder="schemaLabel" template='plain'}}
+            {{#if afFieldIsInvalid name='requiredString' autoform=..}}
+            <span class="help-block">{{{afFieldMessage name='requiredString' autoform=..}}}</span>
             {{/if}}
           </div>
+          {{/with}}
           <div class="form-group {{#if afFieldIsInvalid name='optionalString'}}has-error{{/if}}">
             {{> afFieldLabel name='optionalString'}}
             {{> afFieldInput name='optionalString'}}
@@ -85,7 +87,15 @@
           </div>
           <div class="form-group {{#if afFieldIsInvalid name='requiredSelect'}}has-error{{/if}}">
             {{> afFieldLabel name='requiredSelect'}}
-            {{> afFieldInput name='requiredSelect' options=numSelectOptions}}
+            {{#afFieldSelect name='requiredSelect'}}
+              <optgroup label="Group One">
+                <option value="1">One</option>
+              </optgroup>
+              <optgroup label="Group Two">
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </optgroup>
+            {{/afFieldSelect}}
             {{#if afFieldIsInvalid name='requiredSelect'}}
             <span class="help-block">{{{afFieldMessage name='requiredSelect'}}}</span>
             {{/if}}
@@ -290,6 +300,7 @@
 </template>
 
 <template name="virtualFields">
+  {{#if showPersonForm}}
   {{#autoForm collection='Persons' validation="keyup" id="personsForm" type="insert"}}
   <fieldset>
     <legend>Add a Person</legend>
@@ -310,6 +321,7 @@
   </fieldset>
   <button type="submit" class="btn btn-primary">Insert</button>
   {{/autoForm}}
+  {{/if}}
   <table class="table table-bordered table-striped table-hover" style="margin: 25px 0;">
     <thead>
       <tr>
@@ -326,7 +338,7 @@
         <td>{{lastName}}</td>
         <td>{{fullName}}</td>
         <td>
-          {{#afDeleteButton collection='Persons' doc=this}}<span style="color: yellow">DELETE ME</span>{{/afDeleteButton}}
+          {{#afDeleteButton collection='Persons' doc=this style='height: 60px;'}}<span style="color: yellow">DELETE ME</span>{{/afDeleteButton}}
           {{> afDeleteButton collection='Persons' doc=this}}
         </td>
       </tr>
@@ -336,7 +348,7 @@
 </template>
 
 <template name="contactForm">
-  {{#autoForm schema="ContactFormSchema" id="contactForm" type="method" meteormethod="sendEmail"}}
+  {{#autoForm schema=Schemas.ContactForm id="contactForm" type="method" meteormethod="sendEmail"}}
   <fieldset>
     <legend>Contact Us</legend>
     <div class="form-group {{#if afFieldIsInvalid name='name'}}has-error{{/if}}">
@@ -369,7 +381,7 @@
 </template>
 
 <template name="normalSubmitForm">
-  {{#autoForm schema="ContactFormSchema" id="contactForm2" action="/fake" method="post"}}
+  {{#autoForm schema=Schemas.ContactForm id="contactForm2" action="/fake" method="post"}}
   <fieldset>
     <legend>Contact Us</legend>
     {{> afQuickField name="name" label=false placeholder="schemaLabel"}}
