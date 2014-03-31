@@ -247,13 +247,17 @@
             <span class="help-block">{{{afFieldMessage name='a.b.c'}}}</span>
             {{/if}}
           </div>
-          <div class="form-group {{#if afFieldIsInvalid name='arrayOfObjects.0.name'}}has-error{{/if}}">
-            {{> afFieldLabel name='arrayOfObjects.0.name'}}
-            {{> afFieldInput name='arrayOfObjects.0.name'}}
-            {{#if afFieldIsInvalid name='arrayOfObjects.0.name'}}
-            <span class="help-block">{{{afFieldMessage name='arrayOfObjects.0.name'}}}</span>
-            {{/if}}
-          </div>
+          <fieldset>
+            <label>Array of Objects Test</label>
+            {{#afEachArrayItem name='items'}}
+            <div class="autoform-array-item">
+            {{> afQuickField name=this.current.name}}
+            {{> afQuickField name=this.current.quantity}}
+            <button class="btn btn-primary autoform-remove-item" data-autoform-field="items">Remove</button>
+            </div>
+            {{/afEachArrayItem}}
+            <button class="btn btn-primary autoform-add-item" data-autoform-field="items">Add</button>
+          </fieldset>
         </div>
         <button type="submit" class="btn btn-primary">{{#if newDocMode}}Insert{{else}}Update{{/if}}</button>
         <button type="reset" class="btn btn-default">Reset</button>
@@ -266,7 +270,7 @@
         {{> normalSubmitForm}}
         <h2>Quick Form Test</h2>
         <div class="formWrap">
-          {{> quickForm collection=docsCollection validation="keyup" type="disabled" id="myQuickForm" buttonClasses="btn btn-primary"}}
+          {{> quickForm collection=docsCollection validation="keyup" type="update" id="myQuickForm" buttonClasses="btn btn-primary" doc=selectedDoc buttonContent="Update"}}
         </div>
         <h2>Dates Test</h2>
         {{> datesForm}}

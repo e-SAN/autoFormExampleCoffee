@@ -31,7 +31,8 @@ Documents = new Meteor.Collection("documents", {
     optionalStringArray: {
       type: [String],
       optional: true,
-      minCount: 2
+      minCount: 2,
+      maxCount: 4
     },
     requiredBoolean: {
       type: Boolean,
@@ -68,8 +69,10 @@ Documents = new Meteor.Collection("documents", {
     },
     firstOptionRequiredSelect: {
       type: Number,
-      valueIsAllowed: function(val) {
-        return (val === 1 || val === 2 || val === 3);
+      custom: function() {
+        if (!_.contains([1, 2, 3], this.value)) {
+          return "valueNotAllowed";
+        }
       }
     },
     maxSelect: {
@@ -146,13 +149,19 @@ Documents = new Meteor.Collection("documents", {
       label: "Subdocument field value",
       optional: true
     },
-    arrayOfObjects: {
-      type: [Object],
+    items: {
+      type: Array,
       optional: true
     },
-    'arrayOfObjects.$.name': {
-      type: String,
-      label: "Array of object name"
+    'items.$': {
+      type: Object,
+      label: "Item"
+    },
+    'items.$.name': {
+      type: String
+    },
+    'items.$.quantity': {
+      type: Number
     }
   }
 });
@@ -234,7 +243,7 @@ Persons.simpleSchema().messages({
 
 var Schemas = {};
 
-Handlebars.registerHelper("Schemas", Schemas);
+UI.registerHelper("Schemas", Schemas);
 
 Schemas.ContactForm = new SimpleSchema({
   name: {
@@ -318,7 +327,6 @@ if (Meteor.isClient) {
         }
       },
       docToForm: function(doc) {
-        console.log(doc.optionalStringArray);
         if (_.isArray(doc.optionalStringArray)) {
           doc.optionalStringArray = doc.optionalStringArray.join(", ");
         }
@@ -328,7 +336,6 @@ if (Meteor.isClient) {
         if (typeof doc.optionalStringArray === "string") {
           doc.optionalStringArray = doc.optionalStringArray.split(",");
         }
-        console.log(doc.optionalStringArray);
         return doc;
       }
     },
@@ -344,7 +351,7 @@ if (Meteor.isClient) {
     }
   });
 
-  AutoForm.addHooks(['docForm', 'datesForm1', 'datesForm2', 'datesForm3'], {
+  AutoForm.addHooks(['docForm', 'datesForm1', 'datesForm2', 'datesForm3', 'myQuickForm'], {
     after: {
       insert: function(error, result) {
         if (error) {
@@ -368,7 +375,7 @@ if (Meteor.isClient) {
 
   AutoForm.addHooks(null, {
     onSubmit: function () {
-      console.log("onSubmit ALL FORMS!");
+      console.log("onSubmit ALL FORMS!", arguments);
     }
   });
 
@@ -412,7 +419,7 @@ if (Meteor.isClient) {
     return dateToDateString(new Date);
   };
 
-  UI.body.testData = function() {
+  UI.body.testData = function bodyTestDataHelper() {
     if (Session.get("selectedDoc")) {
       return {docFormType: "update"};
     } else {
@@ -457,7 +464,7 @@ if (Meteor.isClient) {
     return Session.get("showPersonForm");
   };
 
-  Handlebars.registerHelper("numSelectOptions", function(options) {
+  UI.registerHelper("numSelectOptions", function(options) {
     return [
       {label: "One", value: 1},
       {label: "Two", value: 2},
@@ -465,8 +472,8 @@ if (Meteor.isClient) {
     ];
   });
 
-  Handlebars.registerHelper("log", function(what) {
-    console.log(what);
+  UI.registerHelper("log", function(what, who) {
+    console.log(what, who);
   });
 }
 
