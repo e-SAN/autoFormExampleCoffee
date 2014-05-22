@@ -11,7 +11,7 @@
     <h1>Meteor Autoform Example</h1>
     <div class="row" style="margin-bottom: 50px;">
       <div class="col-12 col-lg-8">
-        {{#autoForm collection=docsCollection doc=selectedDoc id="docForm" type=docFormType}}
+        {{#autoForm collection=docsCollection doc=selectedDoc id="docForm" type=docFormType template="bootstrap3"}}
         <div class="formWrap">
           {{#with tester}}
           <div class="form-group {{#if afFieldIsInvalid name='requiredString' autoform=..}}has-error{{/if}}">
@@ -266,14 +266,22 @@
         {{> virtualFields}}
         <h2>Contact Form Test</h2>
         {{> contactForm}}
+        <h2>Horizontal Contact Form Test</h2>
+        {{> horizontalContactForm}}
         <h2>Normal Submit Form</h2>
         {{> normalSubmitForm}}
         <h2>Quick Form Test</h2>
         <div class="formWrap">
-          {{> quickForm collection=docsCollection validation="keyup" type="update" id="myQuickForm" buttonClasses="btn btn-primary" doc=selectedDoc buttonContent="Update"}}
+          {{> quickForm collection=docsCollection validation="keyup" type="update" id="myQuickForm" buttonClasses="btn btn-primary" doc=selectedDoc buttonContent="Update" omitFields="requiredString,optionalString,items.$.quantity"}}
         </div>
         <h2>Dates Test</h2>
         {{> datesForm}}
+        <h2>afFieldValueIs Test</h2>
+        {{> isForm}}
+        <h2>afFieldValueContains Test</h2>
+        {{> containsForm}}
+        <h2>getFieldValue Test</h2>
+        {{> reactiveCurrentValue}}
       </div>
       <div class="col-12 col-lg-4">
         {{> docTable}}
@@ -310,7 +318,7 @@
     <legend>Add a Person</legend>
     <div class="form-group {{#if afFieldIsInvalid name='firstName'}}has-error{{/if}}">
       {{> afFieldLabel name='firstName'}}
-      {{> afFieldInput name='firstName'}}
+      {{> afFieldInput name='firstName' disabled='disabled'}}
       {{#if afFieldIsInvalid name='firstName'}}
       <span class="help-block">{{{afFieldMessage name='firstName'}}}</span>
       {{/if}}
@@ -399,6 +407,22 @@
   {{/autoForm}}
 </template>
 
+<template name="horizontalContactForm">
+  {{#autoForm schema=Schemas.ContactForm id="contactForm3" type="method" meteormethod="sendEmail"}}
+  <fieldset>
+    <legend>Contact Us</legend>
+    {{> afQuickField name="name" template="bootstrap3-horizontal" label-class="col-sm-6" input-col-class="col-sm-6"}}
+    {{> afQuickField name="email" template="bootstrap3-horizontal" label-class="col-sm-6" input-col-class="col-sm-6"}}
+    {{> afQuickField name="message" template="bootstrap3-horizontal" label-class="col-sm-6" input-col-class="col-sm-6"}}
+    <div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="reset" class="btn btn-default">Reset</button>
+    </div>
+  </fieldset>
+  {{/autoForm}}
+  {{> quickForm schema=Schemas.ContactForm id="contactForm4" type="method" meteormethod="sendEmail" template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9"}}
+</template>
+
 <template name="datesForm">
   {{#autoForm collection="Dates" type="insert" doc=dateDoc id="datesForm1"}}
   {{> afQuickField name="date" value=today}}
@@ -417,5 +441,36 @@
   <div>
     <button type="submit" class="btn btn-primary">Insert</button>
   </div>
+  {{/autoForm}}
+</template>
+
+<template name="isForm">
+  <p>A "B" field is displayed only when the current value of the "A" field is "foo".</p>
+  {{#autoForm collection="FieldValueIs" type="insert" id="FieldValueIsForm"}}
+  {{> afQuickField name="a" options="allowed" noselect=true}}
+  {{#if afFieldValueIs name="a" value="foo"}}
+  {{> afQuickField name="b"}}
+  {{/if}}
+  <button type="submit" class="btn btn-primary">Insert</button>
+  {{/autoForm}}
+</template>
+
+<template name="containsForm">
+  <p>A "B" field is displayed only when the current value of the "A" field contains "foo".</p>
+  {{#autoForm collection="FieldValueContains" type="insert" id="FieldValueContainsForm"}}
+  {{> afQuickField name="a" options="allowed" noselect=true}}
+  {{#if afFieldValueContains name="a" value="foo"}}
+  {{> afQuickField name="b"}}
+  {{/if}}
+  <button type="submit" class="btn btn-primary">Insert</button>
+  {{/autoForm}}
+</template>
+
+<template name="reactiveCurrentValue">
+  <p>Using AutoForm.getFieldValue, the current value is reactively displayed elsewhere.</p>
+  {{#autoForm collection="FieldValueIs" type="insert" id="reactiveCurrentValueForm"}}
+  {{> afQuickField name="a" options="allowed" noselect=true}}
+  <p>The current value of the "A" field is {{currentAFieldValue}}.</p>
+  <button type="submit" class="btn btn-primary">Insert</button>
   {{/autoForm}}
 </template>

@@ -166,19 +166,6 @@ Documents = new Meteor.Collection("documents", {
   }
 });
 
-Documents.allow({
-  insert: function() {
-    return true;
-  },
-  update: function() {
-    return true;
-  },
-  remove: function() {
-    return true;
-  },
-  fetch: []
-});
-
 Documents.simpleSchema().messages({
   noD: "No Ds allowed!!!",
   'regEx requiredEmail': "[label] is not a valid e-mail address",
@@ -222,19 +209,6 @@ Persons.helpers({
   fullName: function () {
     return this.firstName + ' ' + this.lastName;
   }
-});
-
-Persons.allow({
-  insert: function() {
-    return true;
-  },
-  update: function() {
-    return true;
-  },
-  remove: function() {
-    return true;
-  },
-  fetch: []
 });
 
 Persons.simpleSchema().messages({
@@ -283,17 +257,28 @@ Dates = new Meteor.Collection("dates", {
   }
 });
 
-Dates.allow({
-  insert: function() {
-    return true;
-  },
-  update: function() {
-    return true;
-  },
-  remove: function() {
-    return true;
-  },
-  fetch: []
+FieldValueIs = new Meteor.Collection("FieldValueIs", {
+  schema: {
+    a: {
+      type: String,
+      allowedValues: ["foo", "bar"]
+    },
+    b: {
+      type: String
+    }
+  }
+});
+
+FieldValueContains = new Meteor.Collection("FieldValueContains", {
+  schema: {
+    a: {
+      type: [String],
+      allowedValues: ["foo", "bar"]
+    },
+    b: {
+      type: String
+    }
+  }
 });
 
 if (Meteor.isClient) {
@@ -341,6 +326,7 @@ if (Meteor.isClient) {
     },
     contactForm: contactCB,
     contactForm2: contactCB,
+    contactForm3: contactCB,
     personsForm: {
       before: {
         remove: function(id) {
@@ -464,6 +450,10 @@ if (Meteor.isClient) {
     return Session.get("showPersonForm");
   };
 
+  Template.reactiveCurrentValue.currentAFieldValue = function () {
+    return AutoForm.getFieldValue("reactiveCurrentValueForm", "a") || "not selected";
+  };
+
   UI.registerHelper("numSelectOptions", function(options) {
     return [
       {label: "One", value: 1},
@@ -478,6 +468,22 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
+
+  _.each([Documents, Persons, Dates, FieldValueIs, FieldValueContains], function (collection) {
+    collection.allow({
+      insert: function() {
+        return true;
+      },
+      update: function() {
+        return true;
+      },
+      remove: function() {
+        return true;
+      },
+      fetch: []
+    });
+  });
+
   Meteor.publish("docs", function() {
     return Documents.find();
   });
