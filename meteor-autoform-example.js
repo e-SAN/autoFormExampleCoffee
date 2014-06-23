@@ -70,9 +70,16 @@ Documents = new Meteor.Collection("documents", {
     firstOptionRequiredSelect: {
       type: Number,
       custom: function() {
-        if (!_.contains([1, 2, 3], this.value)) {
-          return "valueNotAllowed";
+        if (this.isSet && (!this.operator || this.operator === "$set") && !_.contains([1, 2, 3], this.value)) {
+          return "notAllowed";
         }
+      },
+      autoform: {
+        options: [
+          {label: "One", value: 1},
+          {label: "Two", value: 2},
+          {label: "Three", value: 3}
+        ]
       }
     },
     maxSelect: {
