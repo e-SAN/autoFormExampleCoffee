@@ -1,0 +1,47 @@
+<template name="virtualFields">
+  {{#if showPersonForm}}
+  {{#autoForm collection='Persons' validation="keyup" id="personsForm" type="insert"}}
+  <fieldset>
+    <legend>Add a Person</legend>
+    <div class="form-group {{#if afFieldIsInvalid name='firstName'}}has-error{{/if}}">
+      {{> afFieldLabel name='firstName'}}
+      {{> afFieldInput name='firstName' disabled='disabled'}}
+      {{#if afFieldIsInvalid name='firstName'}}
+      <span class="help-block">{{{afFieldMessage name='firstName'}}}</span>
+      {{/if}}
+    </div>
+    <div class="form-group {{#if afFieldIsInvalid name='lastName'}}has-error{{/if}}">
+      {{> afFieldLabel name='lastName'}}
+      {{> afFieldInput name='lastName'}}
+      {{#if afFieldIsInvalid name='lastName'}}
+      <span class="help-block">{{{afFieldMessage name='lastName'}}}</span>
+      {{/if}}
+    </div>
+  </fieldset>
+  <button type="submit" class="btn btn-primary">Insert</button>
+  {{/autoForm}}
+  {{/if}}
+  <table class="table table-bordered table-striped table-hover" style="margin: 25px 0;">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Full Name (virtual)</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each persons}}
+      <tr>
+        <td>{{firstName}}</td>
+        <td>{{lastName}}</td>
+        <td>{{fullName}}</td>
+        <td>
+          {{#afDeleteButton collection='Persons' doc=this style='height: 60px;'}}<span style="color: yellow">DELETE ME</span>{{/afDeleteButton}}
+          {{> afDeleteButton collection='Persons' doc=this}}
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</template>

@@ -1,0 +1,20 @@
+<template name="docTable">
+  <table class="table table-bordered table-striped table-hover">
+    <tbody>
+      <tr>
+        <td><button type="button" class="btn-link docClear">New Document</button></td>
+        <td></td>
+      </tr>
+      {{#each documents}}
+      <tr>
+        <td><button type="button" class="btn-link docSelect">{{requiredString}}</button></td>
+        <td>
+          {{#autoForm collection='Documents' doc=this type="remove"}}
+          <button type="submit" class="btn btn-primary">Delete</button>
+          {{/autoForm}}
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</template>

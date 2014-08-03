@@ -1,0 +1,14 @@
+<template name="normalSubmitForm">
+  {{#autoForm schema=Schemas.ContactForm id="contactForm2" action="/fake" method="post"}}
+  <fieldset>
+    <legend>Contact Us</legend>
+    {{> afQuickField name="name" label=false placeholder="schemaLabel"}}
+    {{> afQuickField name="email" label=false placeholder="schemaLabel"}}
+    {{> afQuickField name="message" label=false placeholder="schemaLabel" rows="10"}}
+    <div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="reset" class="btn btn-default">Reset</button>
+    </div>
+  </fieldset>
+  {{/autoForm}}
+</template>

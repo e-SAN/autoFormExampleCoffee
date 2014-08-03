@@ -1,0 +1,20 @@
+<template name="datesForm">
+  {{#autoForm collection="Dates" type="insert" doc=dateDoc id="datesForm1"}}
+  {{> afQuickField name="date" value=today}}
+  <div>
+    <button type="submit" class="btn btn-primary">Insert</button>
+  </div>
+  {{/autoForm}}
+  {{#autoForm collection="Dates" type="insert" doc=dateTimeDoc id="datesForm2"}}
+  {{> afQuickField name="dateTime" type="datetime"}}
+  <div>
+    <button type="submit" class="btn btn-primary">Insert</button>
+  </div>
+  {{/autoForm}}
+  {{#autoForm collection="Dates" type="insert" doc=dateTimeLocalDoc id="datesForm3"}}
+  {{> afQuickField name="dateTimeLocal" type="datetime-local" offset="-0100"}}
+  <div>
+    <button type="submit" class="btn btn-primary">Insert</button>
+  </div>
+  {{/autoForm}}
+</template>

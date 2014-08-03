@@ -1,0 +1,8 @@
+<template name="reactiveCurrentValue">
+  <p>Using AutoForm.getFieldValue, the current value is reactively displayed elsewhere.</p>
+  {{#autoForm collection="FieldValueIs" type="insert" id="reactiveCurrentValueForm"}}
+  {{> afQuickField name="a" options="allowed" noselect=true}}
+  <p>The current value of the "A" field is {{currentAFieldValue}}.</p>
+  <button type="submit" class="btn btn-primary">Insert</button>
+  {{/autoForm}}
+</template>

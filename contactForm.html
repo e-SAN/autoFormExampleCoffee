@@ -1,0 +1,32 @@
+<template name="contactForm">
+  {{#autoForm schema=Schemas.ContactForm id="contactForm" type="method" meteormethod="sendEmail"}}
+  <fieldset>
+    <legend>Contact Us</legend>
+    <div class="form-group {{#if afFieldIsInvalid name='name'}}has-error{{/if}}">
+      {{> afFieldLabel name="name"}}
+      {{> afFieldInput name="name"}}
+      {{#if afFieldIsInvalid name="name"}}
+      <span class="help-block">{{{afFieldMessage name="name"}}}</span>
+      {{/if}}
+    </div>
+    <div class="form-group {{#if afFieldIsInvalid name='email'}}has-error{{/if}}">
+      {{> afFieldLabel name="email"}}
+      {{> afFieldInput name="email"}}
+      {{#if afFieldIsInvalid name="email"}}
+      <span class="help-block">{{{afFieldMessage name="email"}}}</span>
+      {{/if}}
+    </div>
+    <div class="form-group {{#if afFieldIsInvalid name='message'}}has-error{{/if}}">
+      {{> afFieldLabel name="message"}}
+      {{> afFieldInput name="message" rows="10"}}
+      {{#if afFieldIsInvalid name="message"}}
+      <span class="help-block">{{{afFieldMessage name="message"}}}</span>
+      {{/if}}
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="reset" class="btn btn-default">Reset</button>
+    </div>
+  </fieldset>
+  {{/autoForm}}
+</template>
