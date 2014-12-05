@@ -1,4 +1,4 @@
-//Schema
+#//Schema
 
 @FieldValueContains = new Meteor.Collection "FieldValueContains", 
   schema: 
